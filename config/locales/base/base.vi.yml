@@ -1,4 +1,5 @@
 vi:
+  language: Ngôn ngữ
   languages:
     en: "Tiếng Anh"
     vi: "Tiếng Việt"
@@ -9,21 +10,28 @@ vi:
         one: "1 lỗi khiến %{model} không thể được lưu"
         other: "%{count} lỗi khiến %{model} không thể được lưu"
 
-  layouts:
-    application:
-      base_title: "Ứng dụng mẫu Ruby on Rails Tutorial"
-
-  navbar:
-    app_name: "Ứng dụng mẫu"
-    home: "Trang chủ"
-    help: "Trợ giúp"
-    sign_up: "Đăng kí"
-    log_in: "Đăng nhập"
-    account: "Tài khoản"
-    profile: "Hồ sơ"
-    settings: "Cài đặt"
-    log_out: "Đăng xuất"
-    users: "Người dùng"
   time:
     formats:
       default: "%d/%m/%Y %H:%M"
+
+  topbar:
+    guest: Khách
+    sign_in: Đăng nhập
+    sign_up: Đăng ký
+    profile: Hồ sơ
+    settings: Cài đặt
+    log_out: Đăng xuất
+
+  sidebar:
+    dashboard: Bảng điều khiển
+    users: Người dùng
+    borrow_requests: Yêu cầu mượn
+    books: Sách
+    authors: Tác giả
+    categories: Thể loại
+    publishers: Nhà xuất bản
+    home: Trang chủ
+    search: Tìm kiếm
+    favorite: Yêu thích
+    follow: Theo dõi
+    borrow_list: Danh sách mượn

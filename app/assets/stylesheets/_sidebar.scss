@@ -1,22 +1,70 @@
-/* ===== Sidebar styles ===== */
-aside {
-  section.user_info {
-    margin-top: 20px;
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1020;
+  width: 185px;
+  height: 100vh;
+
+  background-color: #fef9f9;
+  border-right: 1px solid #ddd;
+  border-radius: 10px 0 0 10px;
+  padding: 0;
+
+  align-self: flex-start;
+
+  .sidebar-title {
+    margin-bottom: 50px;
+    padding: 15px 20px;
+
+    font-size: 30px;
+    line-height: 1.2;
   }
 
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
+  .shelf-text {
+    display: block;
 
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
+    font-size: 48px;
+    font-weight: bold;
+  }
 
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
+  .nav-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 15px 20px;
+
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #f0f0f0;
+      text-decoration: none;
     }
   }
+
+  .nav-link.active {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+    font-weight: bold;
+  }
+}
+
+/* Topbar */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 185px;
+  right: 0;
+  z-index: 1010;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  padding: 0 70px 0 30px;
 }

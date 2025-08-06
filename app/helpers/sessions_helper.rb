@@ -8,6 +8,10 @@ module SessionsHelper
     current_user.present?
   end
 
+  def admin_user?
+    current_user&.admin?
+  end
+
   def forget user
     user.forget
     cookies.delete :user_id
