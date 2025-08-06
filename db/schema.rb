@@ -45,7 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
     t.date "birth_date"
     t.date "death_date"
     t.string "nationality", limit: 100
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -145,8 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "password_digest"
     t.date "date_of_birth"
     t.integer "gender"
@@ -157,6 +154,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -168,6 +167,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
   add_foreign_key "books", "publishers"
   add_foreign_key "borrow_request_items", "books"
   add_foreign_key "borrow_request_items", "borrow_requests"
+  add_foreign_key "borrow_requests", "users"
   add_foreign_key "borrow_requests", "users", column: "approved_by_admin_id"
   add_foreign_key "favorites", "users"
   add_foreign_key "reviews", "books"
