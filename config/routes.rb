@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :password_resets, only: %i(new create edit update)
     namespace :admin do
       resources :books
+      resources :authors
     end
     resources :books, only: [:show] do
       member do
