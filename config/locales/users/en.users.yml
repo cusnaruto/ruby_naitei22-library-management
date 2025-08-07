@@ -9,7 +9,7 @@ en:
       title: "Sign Up"
       submit: "Submit"
       create_account: "Create account"
-    create: 
+    create:
       success: "User was successfully created."
       error: "Error!"
     edit:
@@ -29,7 +29,19 @@ en:
     user:
       delete: "Delete"
       are_you_sure?: "Are you sure to delete this user ?"
+    setup_password:
+      setup_password: "Complete Account Setup"
+      password: "Password"
+      confirm_password: "Confirm Password"
+      date_of_birth: "Date of Birth"
+      gender: "Gender"
+      select_gender: "Select your gender"
+      complete_setup: "Complete Setup"
     not_found: "User not found"
     not_admin: "You are not authorized to perform this action."
+    please_login: "Please log in to access this page."
+    not_correct_user: "You are not authorized to view this profile."
     check_email: "Please check your email for the activation link."
     email_error: "There was an error sending the activation email. Please try again later."
+    password_setup_success: "Account setup completed successfully!"
+    require_password_setup: "You are not authorized to access this feature."

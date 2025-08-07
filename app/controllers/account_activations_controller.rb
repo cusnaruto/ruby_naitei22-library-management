@@ -1,6 +1,7 @@
 class AccountActivationsController < ApplicationController
   before_action :load_user, only: %i(edit)
   before_action :check_authentication, only: %i(edit)
+
   # GET /account_activations/:id/edit
   def edit
     user_successfully_activated
@@ -17,7 +18,8 @@ class AccountActivationsController < ApplicationController
   end
 
   def check_authentication
-    return if !@user.activated && @user.authenticated?(:activation, params[:id])
+    return if !@user.activated? && @user.authenticated?(:activation,
+                                                        params[:id])
 
     flash[:danger] = t(".error")
     redirect_to root_url

@@ -19,6 +19,14 @@
       <% end %>
     <% end %>
 
+    <div class="text-center mt-3">
+    <p><%= t(".or") %></p>
+    <%= link_to auth_provider_path(provider: "google_oauth2"), method: :post,
+                class: "btn btn-danger",
+                data: { turbo: false } do %>
+      <i class="fab fa-google"></i> <%= t(".login_with_google") %>
+    <% end %>
+  </div>
     <p>
       <%= t(".new_user?") %>
       <%= link_to t(".sign_up_now!"), signup_path %>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  get "/auth/:provider/callback", to: "sessions#omniauth"
+  post "/auth/:provider/callback", to: "sessions#omniauth"
+  get "/auth/:provider", to: redirect { |params, request| "/auth/#{params[:provider]}" }, as: :auth_provider
+
   scope "(:locale)", locale: /en|vi/ do
     root "static_pages#home"
 
@@ -7,11 +12,14 @@ Rails.application.routes.draw do
     get "/contact", to: "static_pages#contact", as: :contact
 
     get "signup",   to: "users#new",            as: :signup
-    post "signup",  to: "users#create"        
+    post "signup",  to: "users#create"
 
     get "login",    to: "sessions#new",         as: :login
     post "login",   to: "sessions#create"
     delete "logout",to: "sessions#destroy",     as: :logout
+
+    get "/setup_password", to: "users#setup_password"
+    patch "/setup_password", to: "users#update_password"
 
     resources :users
     resources :account_activations, only: :edit

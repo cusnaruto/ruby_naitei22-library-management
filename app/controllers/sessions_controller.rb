@@ -18,6 +18,25 @@ class SessionsController < ApplicationController
     redirect_to root_url, status: :see_other
   end
 
+  # GET /auth/:provider/callback
+  def omniauth
+    user = User.from_omniauth(request.env["omniauth.auth"])
+
+    if user.persisted?
+      handle_successful_oauth(user)
+    else
+      handle_failed_oauth
+    end
+  rescue StandardError => e
+    handle_oauth_error(e)
+  end
+
+  # GET /auth/failure
+  def omniauth_failure
+    flash[:danger] = t(".oauth_failure")
+    redirect_to login_path
+  end
+
   private
 
   def find_user_and_validate
@@ -33,8 +52,8 @@ class SessionsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
-  def check_activeted
-    return if @user.activated?
+  def check_activated
+    return if @user.activated_at.present?
 
     flash[:warning] = t(".not_activated")
     redirect_to root_url, status: :see_other
@@ -53,5 +72,38 @@ class SessionsController < ApplicationController
     end
     flash[:success] = t(".success")
     redirect_back_or user_path(user), status: :see_other
+  end
+
+  def handle_successful_oauth user
+    reset_session
+    log_in user
+    remember_session user
+
+    if user.needs_password_setup?
+      redirect_to_password_setup
+    else
+      redirect_to_user_profile(user)
+    end
+  end
+
+  def handle_failed_oauth
+    flash[:danger] = t(".oauth_error")
+    redirect_to login_path
+  end
+
+  def handle_oauth_error error
+    Rails.logger.error "OAuth error: #{error.message}"
+    flash[:danger] = t(".oauth_error")
+    redirect_to login_path
+  end
+
+  def redirect_to_password_setup
+    flash[:info] = t(".setup_password_required")
+    redirect_to setup_password_path
+  end
+
+  def redirect_to_user_profile user
+    flash[:success] = t(".oauth_success")
+    redirect_to user_path(user)
   end
 end

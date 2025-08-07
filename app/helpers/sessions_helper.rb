@@ -32,7 +32,14 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= find_user_from_session || find_user_from_cookies
+    @current_user ||= begin
+      if session[:user_id]
+        user = User.find_by(id: session[:user_id])
+        return user if user
+      end
+
+      find_user_from_cookies
+    end
   end
 
   def current_user? user
@@ -61,17 +68,6 @@ module SessionsHelper
   end
 
   private
-
-  def find_user_from_session
-    user_id = session[:user_id]
-    return unless user_id
-
-    user = User.find_by(id: user_id)
-    return unless user
-
-    session_token = session[:session_token]
-    user if user.authenticated?(:remember, session_token)
-  end
 
   def find_user_from_cookies
     user_id = cookies.signed[:user_id]
