@@ -6,13 +6,30 @@ class Book < ApplicationRecord
   MIN_AVAILABLE_QUANTITY = 0
   MIN_BORROW_COUNT = 0
 
+  BORROWED_SELECT_FIELDS = <<~SQL.squish
+    books.id,
+    books.title,
+    books.total_quantity,
+    books.available_quantity,
+    books.author_id,
+    COUNT(borrow_requests.id) AS borrow_count
+  SQL
+
+  BORROWED_GROUP_FIELDS = <<~SQL.squish
+    books.id,
+    books.title,
+    books.total_quantity,
+    books.available_quantity,
+    books.author_id
+  SQL
+
   has_one_attached :image
 
   belongs_to :author
   belongs_to :publisher
   has_many :book_categories, dependent: :destroy
   has_many :categories, through: :book_categories
-  has_many :borrow_request_items, dependent: :destroy
+  has_many :borrow_request_items, dependent: :restrict_with_error
   has_many :borrow_requests, through: :borrow_request_items
   has_many :reviews, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
@@ -74,6 +91,28 @@ class Book < ApplicationRecord
     left_joins(:image_attachment)
       .where(active_storage_attachments: {id: nil})
   end)
+
+  scope :most_borrowed, lambda {|month: nil, year: nil|
+    joins(:borrow_requests)
+      .then do |q|
+        if year.present?
+          q = q.where(
+            "EXTRACT(YEAR FROM borrow_requests.request_date) = ?", year
+          )
+        end
+
+        if month.present?
+          q = q.where(
+            "EXTRACT(MONTH FROM borrow_requests.request_date) = ?", month
+          )
+        end
+
+        q
+      end
+      .select(BORROWED_SELECT_FIELDS)
+      .group(BORROWED_GROUP_FIELDS)
+      .order("borrow_count DESC")
+  }
 
   scope :recommended, -> {order(publication_year: :desc)}
 

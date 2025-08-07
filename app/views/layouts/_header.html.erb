@@ -8,7 +8,7 @@
   <% if logged_in? %>
     <% if admin_user? %>
       <nav class="nav flex-column">
-        <div class="nav-item"><%= link_to "📊 #{t('sidebar.dashboard')}", "#", class: "nav-link" %></div>
+        <div class="nav-item"><%= link_to "📊 #{t('sidebar.dashboard')}", admin_report_path, class: "nav-link #{'active' if params[:controller] == "admin/reports"}" %></div>
         <div class="nav-item"><%= link_to "👥 #{t('sidebar.users')}", admin_users_path, class: "nav-link #{'active' if params[:controller] == "admin/users"}" %></div>
         <div class="nav-item"><%= link_to "📥 #{t('sidebar.borrow_requests')}", admin_borrow_requests_path, class: "nav-link #{'active' if current_page?(admin_borrow_requests_path)}" %></div>
         <div class="nav-item"><%= link_to "📚 #{t('sidebar.books')}", admin_books_path, class: "nav-link #{"active" if params[:controller] == "admin/books"}" %></div>
@@ -52,7 +52,7 @@
 
       <!-- Dropdown ⚙️ -->
       <div class="dropdown">
-        <button class="btn text-dark fs-4 dropdown-toggle" type="button" id="settingsDropdown" data-toggle="dropdown">
+        <button class="btn text-dark fs-4 dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           ⚙️
         </button>
         <ul class="dropdown-menu">
@@ -77,7 +77,7 @@
 
 <!-- Language Switcher -->
 <div class="dropdown locale-switcher">
-  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="localeDropdown" data-toggle="dropdown">
+  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="localeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
     🌐 <%= t("language") %>
   </button>
   <ul class="dropdown-menu">

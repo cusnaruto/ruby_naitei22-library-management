@@ -21,7 +21,13 @@
     <div class="container mt-3">
       <div id="flash">
         <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% bs_class = case message_type.to_s
+           when "notice" then "info"
+           when "alert"  then "danger"
+           when "success" then "success"
+           else message_type
+           end %>
+          <div class="alert alert-<%= bs_class %>"><%= message %></div>
         <% end %>
       </div>
 
@@ -35,6 +41,8 @@
 
     <!-- Modal -->
     <%= render "shared/login_modal" %>
-    
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chartkick@5.0.1/dist/chartkick.js" %>
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chart.js" %>
   </body>
 </html>

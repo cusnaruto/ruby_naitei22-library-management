@@ -9,7 +9,7 @@ class Publisher < ApplicationRecord
   EMAIL_FORMAT = URI::MailTo::EMAIL_REGEXP
   WEBSITE_FORMAT = %r{\Ahttps?://.+\z}
 
-  has_many :books, dependent: :destroy
+  has_many :books, dependent: :restrict_with_error
 
   validates :name,
             presence: true,
