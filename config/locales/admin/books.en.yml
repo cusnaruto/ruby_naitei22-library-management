@@ -35,6 +35,7 @@ en:
         search: "Search by Title"
         no_description: "No description"
         no_cover_image: No cover image available
+        no_category: "No category"
 
       confirmations:
         delete: "Are you sure?"

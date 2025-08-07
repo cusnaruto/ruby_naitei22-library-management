@@ -1,16 +1,17 @@
 class Admin::BooksController < Admin::ApplicationController
-  PERMITTED_BOOK_PARAMS = %i(
-    title
-    description
-    publication_year
-    total_quantity
-    available_quantity
-    author_id
-    publisher_id
-    image
-  ).freeze
+  PERMITTED_BOOK_PARAMS = [
+    :title,
+    :description,
+    :publication_year,
+    :total_quantity,
+    :available_quantity,
+    :author_id,
+    :publisher_id,
+    :image,
+    {category_ids: []}
+  ].freeze
 
-  PRELOAD = %i(author publisher).freeze
+  PRELOAD = %i(author publisher categories).freeze
 
   before_action :set_book, only: %i(show edit update destroy)
 
