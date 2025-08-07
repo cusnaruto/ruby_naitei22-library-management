@@ -23,6 +23,7 @@ en:
     profile: Profile
     settings: Settings
     log_out: Log out
+    
   sidebar:
     dashboard: Dashboard
     users: Users
@@ -36,3 +37,7 @@ en:
     favorite: Favorite
     follow: Follow
     borrow_list: Borrow List
+
+  layouts:
+    application:
+      base_title: "Library Management"

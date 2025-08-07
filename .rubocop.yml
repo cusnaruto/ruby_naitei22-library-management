@@ -55,6 +55,7 @@ AllCops:
     - ".idea/**/*"
     - "**/.DS_Store"
     - "**/.keep"
+    - "lib/assets/book_covers/**/*"
 
 # Indent private/protected/public as deep as method definitions
 Layout/AccessModifierIndentation:
