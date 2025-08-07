@@ -16,8 +16,8 @@ class Admin::BooksController < Admin::ApplicationController
 
   # GET /admin/books
   def index
-    books = Book.search(params[:q]).recent
-    @pagy, @books = pagy(books)
+    @q = Book.ransack(params[:q])
+    @pagy, @books = pagy(@q.result.recent)
   end
 
   # GET /admin/books/:id

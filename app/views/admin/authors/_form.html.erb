@@ -1,14 +1,5 @@
 <%= form_with model: [:admin, author], local: true, class: "needs-validation" do |f| %>
-  <% if author.errors.any? %>
-    <div class="alert alert-danger">
-      <h6><%= t("admin.authors.form.errors", count: author.errors.count) %></h6>
-      <ul>
-        <% author.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "admin/shared/error_messages", object: author %>
 
   <div class="mb-3">
     <%= f.label :name, t("admin.authors.attributes.name"), class: "form-label" %>
