@@ -9,7 +9,7 @@ vi:
       title: "Đăng ký tài khoản"
       submit: "Xác nhận"
       create_account: "Tạo tài khoản"
-    create: 
+    create:
       success: "Người dùng đã được tạo thành công."
       error: "Lỗi!"
     edit:
@@ -29,11 +29,19 @@ vi:
     user:
       delete: "Xóa"
       are_you_sure?: "Bạn chắc chắn muốn xóa người dùng này ?"
+    setup_password:
+      setup_password: "Hoàn Tất Thiết Lập Tài Khoản"
+      password: "Mật khẩu"
+      confirm_password: "Xác nhận mật khẩu"
+      date_of_birth: "Ngày sinh"
+      gender: "Giới tính"
+      select_gender: "Chọn giới tính"
+      complete_setup: "Hoàn tất thiết lập"
+    password_setup_success: "Thiết lập tài khoản hoàn tất thành công!"
     not_found: "Không tìm thấy người dùng"
     not_admin: "Bạn không được phép thực hiện hành động này."
     please_login: "Vui lòng đăng nhập để truy cập trang này."
     not_correct_user: "Bạn không được phép xem hồ sơ này."
     check_email: "Vui lòng kiểm tra email của bạn để nhận liên kết kích hoạt."
     email_error: "Đã xảy ra lỗi khi gửi email kích hoạt. Vui lòng thử lại sau."
-    check_email: "Vui lòng kiểm tra email của bạn để nhận liên kết kích hoạt."
-    email_error: "Đã xảy ra lỗi khi gửi email kích hoạt. Vui lòng thử lại sau."
+    require_password_setup: "Bạn không có quyền truy cập chức năng này."

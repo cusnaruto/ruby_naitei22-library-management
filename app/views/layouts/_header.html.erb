@@ -38,7 +38,7 @@
   <% if logged_in? %>
     <div class="left-content">
       <span class="fw-bold fs-5">
-        <%= gravatar_for @user, size: 30 %>
+        <%= gravatar_for current_user, size: 30 %>
         <%= current_user&.name %>
       </span>
     </div>

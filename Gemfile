@@ -58,6 +58,10 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "bootstrap-sass", "3.4.1"
 gem "config"
+gem "figaro"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "rails-i18n", "~> 7.0"
 gem "sassc-rails"
 

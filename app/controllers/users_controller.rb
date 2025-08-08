@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: %i(edit update)
   before_action :load_user, only: %i(show edit update)
   before_action :correct_user, only: %i(edit update)
+  before_action :require_password_setup,
+                only: %i(setup_password update_password)
 
   # GET /signup
   def new
@@ -32,6 +34,23 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # GET /users/setup_password
+  def setup_password
+    @user = current_user
+  end
+
+  # PATCH/PUT /users/:id/update_password
+  def update_password
+    @user = current_user
+
+    if @user.update(password_setup_params)
+      flash[:success] = t(".password_setup_success")
+      redirect_to user_path(@user)
+    else
+      render :setup_password, status: :unprocessable_entity
     end
   end
 
@@ -71,5 +90,16 @@ class UsersController < ApplicationController
   rescue StandardError
     flash[:danger] = t(".email_error")
     redirect_to root_path, status: :see_other
+  end
+
+  def password_setup_params
+    params.require(:user).permit(User::USER_OAUTH_SETUP_PERMIT)
+  end
+
+  def require_password_setup
+    return if current_user&.oauth_user?
+
+    flash[:danger] = t(".require_password_setup")
+    redirect_to root_path
   end
 end

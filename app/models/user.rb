@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   USER_PERMIT = %i(name email password password_confirmation date_of_birth
 gender).freeze
-
+  USER_OAUTH_SETUP_PERMIT = %i(password password_confirmation date_of_birth
+gender).freeze
   USER_PERMIT_FOR_PASSWORD_RESET = %i(password password_confirmation).freeze
 
   has_secure_password
@@ -10,7 +11,9 @@ gender).freeze
   # - Trường password_digest để lưu hash # rubocop:disable Style/AsciiComments
   # - Phương thức authenticate(password) để xác thực # rubocop:disable Style/AsciiComments
 
+  enum role: {user: 0, admin: 1, super_admin: 2}
   enum gender: {male: 0, female: 1, other: 2}
+  enum status: {inactive: 0, active: 1}
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   NAME_MAX_LENGTH = 50
@@ -61,11 +64,15 @@ gender).freeze
     digest = send "#{attribute}_digest"
     return false unless digest
 
-    BCrypt::Password.new(digest).is_password? token
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def activate
-    update_columns(activated: true, activated_at: Time.zone.now)
+    update_column(:activated_at, Time.zone.now)
+  end
+
+  def activated?
+    activated_at.present?
   end
 
   def send_activation_email
@@ -101,6 +108,36 @@ gender).freeze
     end
   end
 
+  def self.from_omniauth auth
+    user = find_by(email: auth.info.email)
+
+    if user
+      user.update(provider: auth.provider, uid: auth.uid)
+      user
+    else
+      # New user - create account
+      create(
+        name: auth.info.name,
+        email: auth.info.email,
+        provider: auth.provider,
+        uid: auth.uid,
+        gender: :other,
+        date_of_birth: 18.years.ago.to_date,
+        status: :active,
+        activated_at: Time.current,
+        password: SecureRandom.hex(16)
+      )
+    end
+  end
+
+  def oauth_user?
+    provider.present?
+  end
+
+  def needs_password_setup?
+    oauth_user? && created_at == updated_at
+  end
+
   private
 
   def downcase_email
@@ -108,7 +145,9 @@ gender).freeze
   end
 
   def password_required?
-    password_digest.blank? || !password.nil?
+    return false if oauth_user? && new_record?
+
+    (password_digest.blank? || !password.nil?) && !oauth_user?
   end
 
   def password_presence_if_confirmation_provided
@@ -119,6 +158,7 @@ gender).freeze
 
   def create_activation_digest
     self.activation_token = User.new_token
+
     self.activation_digest = User.digest(activation_token)
   end
 end

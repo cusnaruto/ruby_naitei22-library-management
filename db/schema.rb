@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
+ActiveRecord::Schema[7.0].define(version: 2025_08_07_073324) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -142,21 +142,30 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_05_061726) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.date "date_of_birth"
-    t.integer "gender"
-    t.string "remember_digest"
-    t.boolean "admin", default: false
-    t.string "activation_digest"
-    t.boolean "activated", default: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.integer "role", default: 0, null: false
+    t.integer "gender", null: false
+    t.date "date_of_birth", null: false
+    t.integer "status", default: 0, null: false
+    t.string "phone_number", limit: 20
+    t.string "address"
+    t.string "activation_token"
     t.datetime "activated_at"
-    t.string "reset_digest"
-    t.datetime "reset_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remember_digest"
+    t.string "reset_digest"
+    t.string "activation_digest"
+    t.string "provider"
+    t.string "uid"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["remember_digest"], name: "index_users_on_remember_digest"
+    t.index ["reset_digest"], name: "index_users_on_reset_digest"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
