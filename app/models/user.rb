@@ -20,6 +20,8 @@ gender).freeze
   EMAIL_MAX_LENGTH = 255
   MAX_YEARS_AGO = 100
 
+  has_many :reviews, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email

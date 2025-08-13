@@ -1,7 +1,33 @@
-<% provide :title, t(".title") %>
-<h1><%= t(".heading") %></h1>
-<p>
-  <%= t(".description_html",
-    link: link_to(t(".link"), Settings.links.rails_home, target: "_blank")
-  ).html_safe %>
-</p>
+<% provide :title, t(".page_title") %>
+<!-- Banner -->
+<div class="position-relative text-white mb-5">
+  <%= image_tag Settings.images.banner_image, class: "img-fluid w-100 rounded-5", id: "banner-image", alt: "Banner" %>
+  <div class="home-search">
+    <h2 class="fw-bold display-2 mb-1"><%= t(".greeting") %></h2>
+    <h2 class="fw-bold display-2 mt-1 mb-1"><%= current_user&.name || t(".guest") %></h2>
+    <p class="mb-5"><%= t(".start_with_book") %></p>
+    <h5 class="mb-2 border border-white rounded-5 p-3 text-center d-inline-block"><%= t(".request_book") %></h5>
+
+    <!-- Search form -->
+    <%= form_with url: "#", method: :get, local: true, class: "d-flex mt-3" do |f| %>
+      <%= select_tag :category,
+          options_for_select([t(".title"), t(".category"),t(".author"), t(".publisher")]),
+          class: "form-select w-auto rounded-start-5 text-center" %>
+
+      <%= f.text_field :q,
+          placeholder: t(".search_placeholder"),
+          class: "form-control border-start-0 border-end-0 rounded-0 px-5" %>
+
+      <%= f.submit "🔍", class: "btn-danger rounded-end-5 px-0" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Section: Recommended -->
+<div class="mb-5 ps-5" id="recommended-books-section">
+  <h4 class="fw-semibold"><%= t(".good_morning") %></h4>
+  <p class="text-muted"><%= t(".recommended") %></p>
+  <%= turbo_frame_tag "recommended_books" do %>
+    <%= render partial: "books/recommended_books" %>
+  <% end %>
+</div>

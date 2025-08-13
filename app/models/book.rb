@@ -9,4 +9,12 @@ class Book < ApplicationRecord
   has_many :borrow_requests, through: :borrow_request_items
   has_many :reviews, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
+
+  scope :recommended, -> {order(publication_year: :desc)}
+
+  def average_rating
+    return 0 if reviews.empty?
+
+    reviews.average(:score).round(1)
+  end
 end

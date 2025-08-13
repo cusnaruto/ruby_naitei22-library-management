@@ -3,7 +3,9 @@ vi:
   languages:
     en: "Tiếng Anh"
     vi: "Tiếng Việt"
-
+  layouts:
+    application:
+      base_title: "Thư viện Sách" 
   errors:
     template:
       header:

@@ -8,15 +8,19 @@ en:
         %{link1}.
         To get help on this sample app, see the
         %{link2}
-        book.
       link1: "Ruby on Rails Tutorial Help Page"
       link2: "Ruby on Rails Tutorial"
 
     home:
-      title: "Home"
-      heading: "Sample App"
-      description_html: >
-        This is the home page for the
-        %{link}
-        sample application.
-      link: "Ruby on Rails Tutorial"
+      page_title: "Home"
+      greeting: "Good morning,"
+      guest: "Guest"
+      start_with_book: "Start your day with a book"
+      request_book: "Request for a BOOK? 🔍"
+      title: "Title"
+      category: "Category"
+      author: "Author"
+      publisher: "Publisher"
+      search_placeholder: "Search..."
+      good_morning: "Good Morning"
+      recommended: "Recommended for You"
