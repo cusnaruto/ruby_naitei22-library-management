@@ -22,6 +22,10 @@ gender).freeze
 
   has_many :reviews, dependent: :destroy
 
+  has_many :favorites, dependent: :destroy
+
+  has_one_attached :image
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
@@ -42,6 +46,10 @@ gender).freeze
                      allow_nil: true,
                      if: :password_required?
   validate :password_presence_if_confirmation_provided
+
+  def favorited? item
+    favorites.exists?(favorable: item)
+  end
 
   def date_of_birth_must_be_within_last_100_years
     return if date_of_birth.blank?

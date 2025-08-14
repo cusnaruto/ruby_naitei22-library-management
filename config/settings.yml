@@ -6,8 +6,10 @@ links:
   rails_help: "http://www.railstutorial.org/help"
   rails_book: "http://www.railstutorial.org/book"
 digits:
+  digit_0: 0
   digit_5: 5
   digit_6: 6
+  digit_7: 7
   digit_14: 14
   digit_20: 20
 pagy:
@@ -20,6 +22,8 @@ user_mailer:
 images:
   banner_image: "banner.jpg"
   default_cover: "default_cover.jpg"
+  default_author: "default_author.jpg"
+  rating_and_reviews_avatar: "Rating&comment_user_image.jpg"
 mailer:
   expire_hour: 2
 sizes:
@@ -27,3 +31,6 @@ sizes:
 
 datetime_formats:
   default: "%d-%m-%Y %H:%M"
+
+date_format:
+  long: "%B %d, %Y"

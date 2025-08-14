@@ -41,3 +41,17 @@ vi:
   layouts:
     application:
       base_title: "Quản lí thư viện"
+
+  login_modal:
+    title: "Yêu cầu đăng nhập"
+    message: "Bạn cần đăng nhập để thực hiện thao tác này."
+    login_button: "Đăng nhập"
+    cancel_button: "Hủy"
+    close: "Đóng"
+
+  pagy:
+    info:
+      single_page:
+        one: "Hiển thị <b>%{count}</b> mục"
+        other: "Hiển thị <b>%{count}</b> mục"
+      multiple_pages: "Hiển thị mục <b>%{from}–%{to}</b> trong tổng số <b>%{count}</b>"

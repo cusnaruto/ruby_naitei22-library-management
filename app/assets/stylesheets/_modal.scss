@@ -1,0 +1,19 @@
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-backdrop.fade.show {
+  opacity: 0.5 !important;
+}
+
+.modal.show {
+  opacity: 1 !important;
+}

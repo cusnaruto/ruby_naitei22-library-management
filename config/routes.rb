@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get "/auth/:provider/callback", to: "sessions#omniauth"
   post "/auth/:provider/callback", to: "sessions#omniauth"
   get "/auth/:provider", to: redirect { |params, request| "/auth/#{params[:provider]}" }, as: :auth_provider
@@ -24,9 +23,16 @@ Rails.application.routes.draw do
     resources :users
     resources :account_activations, only: :edit
     resources :password_resets, only: %i(new create edit update)
-    resources :books, only: [:show]
     namespace :admin do
       resources :books
+    end
+    resources :books, only: [:show] do
+      member do
+        post :borrow
+        post :add_to_favorite
+        delete :remove_from_favorite
+        post :write_a_review
+      end
     end
   end
 end
