@@ -25,5 +25,8 @@ Rails.application.routes.draw do
     resources :account_activations, only: :edit
     resources :password_resets, only: %i(new create edit update)
     resources :books, only: [:show]
+    namespace :admin do
+      resources :books
+    end
   end
 end
