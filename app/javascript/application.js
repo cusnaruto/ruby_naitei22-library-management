@@ -1,6 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import '@hotwired/turbo-rails'
-import 'controllers'
-import 'custom/menu'
-import "utils/time_display"
-
+import '@hotwired/turbo-rails';
+import 'controllers';
+import 'custom/menu';
+import "modals/login_modal";
+import "utils/time_display";

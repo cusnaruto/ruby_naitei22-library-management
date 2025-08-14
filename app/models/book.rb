@@ -64,6 +64,10 @@ class Book < ApplicationRecord
   validates :publisher_id,
             presence: true
 
+  scope :by_author, ->(author_id) {where(author_id:)}
+
+  scope :exclude_book, ->(book_id) {where.not(id: book_id)}
+
   scope :search, (lambda do |keyword|
     where("title LIKE ?", "%#{keyword}%") if keyword.present?
   end)
@@ -77,7 +81,7 @@ class Book < ApplicationRecord
   scope :recommended, -> {order(publication_year: :desc)}
 
   def average_rating
-    return 0 if reviews.empty?
+    return Settings.digits.digit_0 if reviews.empty?
 
     reviews.average(:score).round(1)
   end
