@@ -6,7 +6,10 @@ links:
   rails_help: "http://www.railstutorial.org/help"
   rails_book: "http://www.railstutorial.org/book"
 digits:
+  digit_5: 5
   digit_6: 6
+  digit_14: 14
+  digit_20: 20
 pagy:
   items: 10
 email:
@@ -14,7 +17,9 @@ email:
 user_mailer:
   host: localhost:3000
   protocol: http
-
+images:
+  banner_image: "banner.jpg"
+  default_cover: "default_cover.jpg"
 mailer:
   expire_hour: 2
 sizes:

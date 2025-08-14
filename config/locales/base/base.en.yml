@@ -3,7 +3,9 @@ en:
   languages:
     en: "English"
     vi: "Vietnamese"
-
+  layouts:
+    application:
+      base_title: "Book Library"
   errors:
     template:
       header:

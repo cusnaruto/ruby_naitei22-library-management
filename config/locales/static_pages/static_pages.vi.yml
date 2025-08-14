@@ -12,10 +12,15 @@ vi:
       link2: "Hướng dẫn Ruby on Rails"
 
     home:
-      title: "Trang chủ"
-      heading: "Ứng dụng mẫu"
-      description_html: >
-        Đây là trang chủ của
-        %{link},
-        một ứng dụng mẫu.
-      link: "Hướng dẫn Ruby on Rails"
+      page_title: "Trang chủ"
+      greeting: "Chào buổi sáng,"
+      guest: "Khách"
+      start_with_book: "Bắt đầu ngày mới với một cuốn sách"
+      request_book: "Bạn cần một cuốn sách? 🔍"
+      title: "Tiêu đề"
+      category: "Thể loại"
+      author: "Tác giả"
+      publisher: "Nhà xuất bản"
+      search_placeholder: "Tìm kiếm..."
+      good_morning: "Chào buổi sáng"
+      recommended: "Gợi ý dành cho bạn"

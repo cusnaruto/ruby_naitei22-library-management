@@ -11,7 +11,7 @@ gem "active_storage_validations", "0.9.8"
 
 gem "faker", "2.21.0"
 
-gem "pagy"
+gem "pagy", "~> 6.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.5"
