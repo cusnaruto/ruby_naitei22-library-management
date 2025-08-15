@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :books
       resources :authors
+      resources :publishers
     end
     resources :books, only: [:show] do
       member do

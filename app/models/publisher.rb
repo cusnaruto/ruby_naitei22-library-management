@@ -30,4 +30,10 @@ class Publisher < ApplicationRecord
             length: {maximum: MAX_WEBSITE_LENGTH},
             format: {with: WEBSITE_FORMAT},
             allow_blank: true
+
+  scope :recent, -> {order(created_at: :desc)}
+
+  def self.ransackable_attributes(*)
+    %w(name)
+  end
 end
