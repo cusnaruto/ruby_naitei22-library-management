@@ -94,4 +94,5 @@ group :test do
   gem "webdrivers"
 end
 
+gem "ransack"
 gem "ruby-lsp", "~> 0.26.1"

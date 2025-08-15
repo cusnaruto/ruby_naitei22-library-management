@@ -28,6 +28,11 @@ class Author < ApplicationRecord
 
   scope :alive, -> {where(death_date: nil)}
   scope :deceased, -> {where.not(death_date: nil)}
+  scope :recent, -> {order(created_at: :desc)}
+
+  def self.ransackable_attributes(*)
+    %w(name)
+  end
 
   private
 

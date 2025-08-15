@@ -507,3 +507,20 @@ books = (1..30).to_a
     quantity: 1
   )
 end
+
+puts "🎉 Hoàn thành tạo dữ liệu mẫu!"
+puts "📊 Thống kê:"
+puts "- 📚 Sách: #{Book.count}"
+puts "- ✍️ Tác giả: #{Author.count}"
+puts "- 🏢 Nhà xuất bản: #{Publisher.count}"
+puts "- 🏷️ Thể loại: #{Category.count}"
+puts "- 👥 Người dùng: #{User.count}"
+puts "- ⭐ Đánh giá: #{Review.count}"
+
+puts "\n🔑 Thông tin đăng nhập:"
+puts "- Admin: admin@thuvien.com / 123456"
+puts "- Người dùng thường: nguyenvana@example.com / 123456, tranthib@example.com / 123456,..."
+
+puts "\n📌 Lưu ý:"
+puts "1. Để thêm ảnh bìa, đặt file ảnh vào thư mục lib/assets/book_covers/ với tên book_[id].jpg"
+puts "2. Chạy rails db:seed để cập nhật ảnh bìa sau khi thêm file ảnh"
