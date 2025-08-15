@@ -37,6 +37,7 @@ gender).freeze
   before_create :create_activation_digest
 
   scope :recent, -> {order(created_at: :desc)}
+  scope :order_by_created, -> {order(created_at: :asc)}
 
   scope :with_favorite_books_included, (lambda do
     includes(
