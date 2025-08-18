@@ -76,15 +76,24 @@ en:
         borrow_request:
           attributes:
             end_date:
-              after_start_date: "The end date must be after the start date"
+              after_start_date: "must be after the start date"
             admin_note:
-              blank_if_rejected: "Admin note cannot be blank when status is rejected"
+              blank_if_rejected: "cannot be blank when status is rejected"
             actual_return_date:
               blank_if_returned: "Actual return date cannot be blank when status is returned"
-              cannot_be_future: "Actual return date cannot be in the futuredfsd"
+              cannot_be_future: "Actual return date cannot be in the future"
+              after_borrowed_date: "must be after the actual borrow date"
+              before_end_date: "must be before the end date"
             phone_number:
               invalid_phone_number: "must be a valid phone number (10-15 digits, optional + for country code)"
               blank: "can't be blank"
             address:
               too_long: "is too long (maximum is 500 characters)"
               blank: "can't be blank"
+            approved_date:
+              before_start_date: "must be before the start date"
+              after_request_date: "must be after the request date"
+            actual_borrow_date:
+              after_approved_date: "must be after the approved date"
+              before_end_date: "must be before the end date"
+              after_start_date: "must be after the start date"

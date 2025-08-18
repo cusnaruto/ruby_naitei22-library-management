@@ -1,0 +1,5 @@
+<div class="alert alert-success mt-3" data-controller="flash">
+  <%= notice if defined?(notice) %>
+  <%= flash[:notice] if flash[:notice] %>
+  <%= flash[:alert] if flash[:alert] %>
+</div>

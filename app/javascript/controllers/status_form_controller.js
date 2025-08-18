@@ -5,6 +5,8 @@ export default class extends Controller {
     "statusSelect",
     "adminNoteField",
     "actualReturnDateField",
+    "actualBorrowDateField",
+    "approvedDateField",
     "errorMessage"
   ]
 
@@ -15,26 +17,25 @@ export default class extends Controller {
 
   toggleFields() {
     const status = this.statusSelectTarget.value
+    console.log("statusSelect.value =", status)
+    console.log("tForm.borrowed =", this.tForm.status.borrowed)
+
     this.hideAll()
 
     if (status === this.tForm.status.rejected) {
       this.show(this.adminNoteFieldTarget)
-    } else if (status === this.tForm.status.returned) {
+    } else if (status === this.tForm.status.returned ) {
       this.show(this.actualReturnDateFieldTarget)
+    } else if (status === this.tForm.status.borrowed) {
+      this.show(this.actualBorrowDateFieldTarget)
+    } else if (status === this.tForm.status.approved) {
+      this.show(this.approvedDateFieldTarget)
     }
   }
 
   validateForm(event) {
     const status = this.statusSelectTarget.value
     const currentStatus = this.statusSelectTarget.dataset.currentStatus
-
-    console.log("Status", status)
-    console.log("currentStatus",currentStatus)
-    if (status === currentStatus) {
-      this.showError(this.tForm.error.no_change_status) 
-      event.preventDefault()
-      return
-    }
 
     // Trường hợp rejected -> bắt buộc admin_note
     if (status === this.tForm.status.rejected) {
@@ -46,26 +47,14 @@ export default class extends Controller {
       }
     }
 
-    // Trường hợp returned -> bắt buộc validate date
+    // approved / borrowed / returned -> validate date
+    let dateField
     if (status === this.tForm.status.returned) {
-      const dateField = this.actualReturnDateFieldTarget.querySelector("input")
-      if (!dateField) return
-
-      const selectedDate = new Date(dateField.value)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      if (isNaN(selectedDate.getTime())) {
-        this.showError(this.tForm.error.invalid_date)
-        event.preventDefault()
-        return
-      }
-
-      if (selectedDate > today) {
-        this.showError(this.tForm.error.date_not_in_future)
-        event.preventDefault()
-        return
-      }
+      dateField = this.actualReturnDateFieldTarget.querySelector("input")
+    } else if (status === this.tForm.status.borrowed) {
+      dateField = this.actualBorrowDateFieldTarget.querySelector("input")
+    } else if (status === this.tForm.status.approved) {
+      dateField = this.approvedDateFieldTarget.querySelector("input")
     }
 
     this.clearError()
@@ -74,6 +63,8 @@ export default class extends Controller {
   hideAll() {
     this.adminNoteFieldTarget.classList.add("d-none")
     this.actualReturnDateFieldTarget.classList.add("d-none")
+    this.actualBorrowDateFieldTarget.classList.add("d-none")
+    this.approvedDateFieldTarget.classList.add("d-none")
     this.clearError()
   }
 

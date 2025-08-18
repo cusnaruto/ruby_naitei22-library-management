@@ -37,6 +37,14 @@ vi:
     favorite_button:
       unfavorite: "Bỏ yêu thích"
       add_to_favorite: "Thêm vào yêu thích"
+
+    borrow_modal:
+      add_to_borrow_request: "Thêm vào yêu cầu mượn"
+      total_quantity: "Tổng số lượng"
+      available_quantity: "Số lượng hiện có"
+      quantity: "Số lượng muốn mượn"
+      add_to_borrow_list: "Thêm vào giỏ mượn"
+
     search:
       search_results: "Kết Quả Tìm Kiếm"
       search_placeholder: "Tìm theo tên sách, tác giả, thể loại hoặc nhà xuất bản..."
