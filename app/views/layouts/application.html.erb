@@ -19,9 +19,14 @@
     <%= render "layouts/header" %>
 
     <div class="container mt-3">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
+      <div id="flash">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+      </div>
+
+      <div id="borrow-flash-container"></div>
+
       <%= yield %>
     </div>
 
@@ -29,7 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Modal -->
-    <%= render "shared/modal" %>
+    <%= render "shared/login_modal" %>
     
   </body>
 </html>

@@ -22,7 +22,7 @@
         <div class="nav-item"><%= link_to "🔍 #{t("sidebar.search")}", search_books_path, class: "nav-link" %></div>
         <div class="nav-item"><%= link_to "⭐ #{t("sidebar.favorite")}", favorites_user_path(current_user), class: "nav-link" %></div>
         <div class="nav-item"><%= link_to "👤 #{t("sidebar.follow")}", "#", class: "nav-link" %></div>
-        <div class="nav-item"><%= link_to "📚 #{t("sidebar.borrow_list")}", "#", class: "nav-link" %></div>
+        <div class="nav-item"><%= link_to "📚 #{t("sidebar.borrow_list")}", borrow_request_index_path, class: "nav-link #{'active' if current_page?(borrow_request_index_path)}" %></div>
       </nav>
     <% end %>
   <% else %>

@@ -12,6 +12,9 @@ vi:
         one: "1 lỗi khiến %{model} không thể được lưu"
         other: "%{count} lỗi khiến %{model} không thể được lưu"
 
+  auth:
+    please_login: "Vui lòng đăng nhập để truy cập trang này."
+
   time:
     formats:
       default: "%d/%m/%Y %H:%M"

@@ -9,15 +9,34 @@ class BorrowRequest < ApplicationRecord
   has_many :books, through: :borrow_request_items
 
   enum status: {
-    # expired: -1,
+    expired: -1,
     pending: 0,
     approved: 1,
     rejected: 2,
     returned: 3,
-    overdue: 4
-    # cancelled: 5
-    # borrowed: 6,
+    overdue: 4,
+    cancelled: 5,
+    borrowed: 6
   }
+
+  scope :by_status, lambda {|status|
+    return all unless status.present? && statuses.key?(status)
+
+    where(status:)
+  }
+
+  scope :by_request_date_from, lambda {|date|
+    return all if date.blank?
+
+    where("request_date >= ?", date.to_date)
+  }
+
+  scope :by_request_date_to, lambda {|date|
+    return all if date.blank?
+
+    where("request_date <= ?", date.to_date)
+  }
+
   OVERDUE = "end_date < :now AND status = :approved".freeze
 
   delegate :name, :email, :avatar, to: :user, prefix: true

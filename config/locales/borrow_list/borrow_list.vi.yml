@@ -1,0 +1,36 @@
+vi:
+  borrow_list:
+    index:
+      back_to_cart: "Quay lại giỏ mượn"
+      status: "Trạng thái"
+      all: "Tất cả"
+      request_date_from: "Ngày yêu cầu (từ)"
+      request_date_to: "Ngày yêu cầu (đến)"
+      seq: "STT"
+      request_date: "Ngày yêu cầu"
+      start_date: "Ngày mượn"
+      end_date: "Ngày trả"
+      actions: "Hành động"
+
+    show:
+      back_to_list: "Quay lại danh sách"
+      detail_title: "Chi tiết yêu cầu mượn"
+      request_date: "Ngày yêu cầu"
+      start_date: "Ngày bắt đầu"
+      end_date: "Ngày kết thúc"
+      status: "Trạng thái"
+      borrowed_books: "Sách đã mượn"
+      seq: "STT"
+      book_image: "Ảnh"
+      book_title: "Tên sách"
+      book_author: "Tác giả"
+      book_quantity: "Số lượng"
+      no_image: "Không có ảnh"
+
+    view: "Xem"
+    cancel: "Hủy"
+    confirm_cancel: "Bạn có chắc chắn muốn hủy yêu cầu này không?"
+    not_found: "Không tìm thấy yêu cầu mượn."
+    success: "Yêu cầu mượn đã được hủy."
+    failure: "Không thể hủy yêu cầu đã được xử lý."
+    page_not_found: "Không tìm thấy trang"

@@ -63,5 +63,18 @@ Rails.application.routes.draw do
         delete :remove_from_favorite
       end
     end
+
+    resources :borrow_request, only: [:index] do
+      collection do
+        delete :remove_from_borrow_cart
+        patch :update_borrow_cart
+        post :checkout
+      end
+    end
+    resources :borrow_list, only: [:index, :show] do
+      member do
+        patch :cancel, to: "borrow_list#cancel", as: :cancel
+      end
+    end
   end
 end
