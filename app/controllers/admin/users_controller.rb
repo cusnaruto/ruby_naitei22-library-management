@@ -1,6 +1,6 @@
 # app/controllers/admin/users_controller.rb
 class Admin::UsersController < Admin::ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: %i(show toggle_status)
 
   # GET /admin/users
   def index
@@ -8,7 +8,21 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   # GET /admin/users/:id
-  def show; end
+  def show
+    @pagy, @borrow_requests = pagy(@user.borrow_requests.sorted)
+  end
+
+  # PATCH /admin/users/:id/toggle_status
+  def toggle_status
+    @user.active? ? @user.inactive! : @user.active!
+    respond_to do |format|
+      format.html do
+        redirect_to admin_users_path,
+                    notice: t(".flash.update_success")
+      end
+      format.turbo_stream
+    end
+  end
 
   private
 

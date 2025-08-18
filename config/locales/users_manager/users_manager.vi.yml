@@ -14,3 +14,26 @@ vi:
       flash:
         unauthorized_access: "Bạn không có quyền truy cập vào trang này."
         not_found: "Không tìm thấy người dùng"
+        update_success: "Trạng thái người dùng đã được cập nhật thành công"  
+      show:
+        title: "Chi tiết người dùng"
+        back: "← Quay lại danh sách quản lý người dùng"
+      user_info:
+          title: "Thông tin người dùng"
+          ID: "ID"
+          name: "Tên"
+          email: "Email"
+          status: "Trạng thái"
+          created_at: "Ngày tạo"
+      toggle_status_form:
+          set_active: "Đặt thành hoạt động"
+          set_inactive: "Đặt thành không hoạt động"
+          confirm: "Bạn có chắc chắn muốn thay đổi trạng thái của người dùng này không?"
+      borrow_requests_table:
+          title: "Danh sách yêu cầu mượn"
+          no_requests: "Không tìm thấy yêu cầu mượn"
+          id: "ID yêu cầu"
+          request_date: "Ngày yêu cầu"
+          action: "Hành động"
+          status: "Trạng thái"
+          view: "Xem"

@@ -1,6 +1,9 @@
 <%# app/views/admin/borrow_requests/show.html.erb %>
-<div class="container mt-4">
-  <%= link_to t(".back"), admin_borrow_requests_path, class: "btn btn-secondary ms-3" %>
+<div class="container-fluid mt-4">
+  <%= link_to t(".back", default: "Back"),
+            params[:back_to] || admin_borrow_requests_path,
+            class: "btn btn-secondary" %>
+
   <h3 class="fw-bold mb-4 text-center"><%= t(".title") %></h3>
   <div class="row g-4">
     <!-- User avatar and status -->
@@ -44,10 +47,31 @@
           <input type="text" readonly class="form-control" value="<%= format_date(@borrow_request.end_date) %>">
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <label class="form-label"> <%= t(".status_info.approved_by_label") %></label>
           <%= turbo_frame_tag "approved_by_#{@borrow_request.id}" do %>
             <%= render "admin/borrow_requests/approved_by", borrow_request: @borrow_request %>
+          <% end %>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label"> <%= t(".status_info.approved_date_label") %></label>
+          <%= turbo_frame_tag "approved_date_#{@borrow_request.id}" do %>
+            <%= render "admin/borrow_requests/approved_date", borrow_request: @borrow_request %>
+          <% end %>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label"> <%= t(".status_info.borrowed_by_label") %></label>
+          <%= turbo_frame_tag "borrowed_by_#{@borrow_request.id}" do %>
+            <%= render "admin/borrow_requests/borrowed_by", borrow_request: @borrow_request %>
+          <% end %>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label"> <%= t(".status_info.actual_borrow_date_label") %></label>
+          <%= turbo_frame_tag "actual_borrow_date_#{@borrow_request.id}" do %>
+            <%= render "admin/borrow_requests/actual_borrow_date", borrow_request: @borrow_request %>
           <% end %>
         </div>
 

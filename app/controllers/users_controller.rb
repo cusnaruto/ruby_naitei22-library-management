@@ -102,14 +102,6 @@ blob).freeze
     params.require(:user).permit(User::USER_PERMIT_FOR_PROFILE)
   end
 
-  def logged_in_user
-    return if logged_in?
-
-    store_location
-    flash[:danger] = t(".please_login")
-    redirect_to login_url
-  end
-
   def correct_user
     return if current_user? @user
 

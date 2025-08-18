@@ -1,0 +1,36 @@
+en:
+  borrow_list:
+    index:
+      back_to_cart: "Back to cart"
+      status: "Status"
+      all: "All"
+      request_date_from: "Request date (from)"
+      request_date_to: "Request date (to)"
+      seq: "No."
+      request_date: "Request date"
+      start_date: "Borrow date"
+      end_date: "Return date"
+      actions: "Actions"
+
+    show:
+      back_to_list: "Back to list"
+      detail_title: "Borrow Request Detail"
+      request_date: "Request date"
+      start_date: "Start date"
+      end_date: "End date"
+      status: "Status"
+      borrowed_books: "Borrowed books"
+      seq: "No."
+      book_image: "Image"
+      book_title: "Title"
+      book_author: "Author"
+      book_quantity: "Quantity"
+      no_image: "No image"
+
+    view: "View"
+    cancel: "Cancel"
+    confirm_cancel: "Are you sure you want to cancel this request?"
+    not_found: "Borrow request not found."
+    success: "The borrow request has been cancelled."
+    failure: "The request cannot be cancelled as it has already been processed."
+    page_not_found: "Page not found"

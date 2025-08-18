@@ -11,6 +11,22 @@
       partial: "admin/borrow_requests/approved_by",
       locals: { borrow_request: @borrow_request }
 ) %>
+<%= turbo_stream.replace(
+      "approved_date_#{@borrow_request.id}",
+      partial: "admin/borrow_requests/approved_date",
+      locals: { borrow_request: @borrow_request }
+) %>
+
+<%= turbo_stream.replace(
+      "actual_borrow_date_#{@borrow_request.id}",
+      partial: "admin/borrow_requests/actual_borrow_date",
+      locals: { borrow_request: @borrow_request }
+) %>
+<%= turbo_stream.replace(
+      "borrowed_by_#{@borrow_request.id}",
+      partial: "admin/borrow_requests/borrowed_by",
+      locals: { borrow_request: @borrow_request }
+) %>
 
 <%= turbo_stream.replace(
       "rejected_by_#{@borrow_request.id}",

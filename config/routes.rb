@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|vi/ do
     namespace :admin do
-      resources :users, only: [:index]
+      resources :users, only: [:index, :show] do
+        member do
+          patch :toggle_status
+        end
+      end
       resources :borrow_requests, only: [:index,:show] do
         member do
           get :edit_status
@@ -61,6 +65,19 @@ Rails.application.routes.draw do
       member do
         post :add_to_favorite
         delete :remove_from_favorite
+      end
+    end
+
+    resources :borrow_request, only: [:index] do
+      collection do
+        delete :remove_from_borrow_cart
+        patch :update_borrow_cart
+        post :checkout
+      end
+    end
+    resources :borrow_list, only: [:index, :show] do
+      member do
+        patch :cancel, to: "borrow_list#cancel", as: :cancel
       end
     end
   end

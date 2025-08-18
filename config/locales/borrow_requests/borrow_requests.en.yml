@@ -12,6 +12,9 @@ en:
         rejected: "Rejected"
         returned: "Returned"
         overdue: "Overdue"
+        expired: "Expired"
+        canceled: "Canceled"
+        borrowed: "Borrowed"
       
       index: 
         title: "Borrow Requests Management"
@@ -26,7 +29,7 @@ en:
 
       show:
         title: "Borrow requests items Management"
-        back: "← Back"
+        back: "← Back to Borrow Requests List"
         request_info: 
           full_name: "Full name"
           email: "Email"
@@ -35,10 +38,13 @@ en:
           request_date: "Request date"
         status_info: 
           actual_return_date_label: "Actual return date"
+          actual_borrow_date_label: "Actual borrowed date"
+          approved_date_label: "Approved date"
           admin_note_label: "Admin note"
           approved_by_label: "Approved by"
           rejected_by_label: "Rejected by"
           returned_by_label: "Returned by"
+          borrowed_by_label: "Borrowed by"
         book_borrowed:
           title: "Borrowed Books"
           book_cover: "Cover"
@@ -59,10 +65,16 @@ en:
 
       actual_return_date:
         not_available: "N/A"
+      actual_borrow_date:
+        not_available: "N/A"
+      approved_date:
+        not_available: "N/A"
       admin_note:
         no_note: "N/A"
       approved_by:
         not_approved: "Not Approved"
+      borrowed_by:
+        not_borrowed: "Not Borrowed"
       rejected_by:
         not_rejected: "Not Rejected"
       returned_by:
@@ -75,6 +87,9 @@ en:
           rejected: "rejected"
           returned: "returned"
           overdue: "overdue"
+          expired: "expired"
+          canceled: "canceled"
+          borrowed: "borrowed"
         error:
           admin_note_required: "Admin note is required when rejecting a borrow request"
           invalid_date: "Please select a valid date"

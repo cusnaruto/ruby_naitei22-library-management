@@ -489,7 +489,7 @@ books = (1..30).to_a
     request_date: Date.new(2025, 8, i + 1),
     status: 0,
     start_date: Time.zone.now - 4.days,
-    end_date: Time.zone.now - 1.day,
+    end_date: Time.zone.now + 1.day,
     actual_return_date: nil,
     admin_note: nil,
     approved_by_admin_id: nil

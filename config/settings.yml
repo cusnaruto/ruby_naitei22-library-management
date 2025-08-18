@@ -9,9 +9,11 @@ links:
 
 digits:
   digit_0: 0
+  digit_1: 1
   digit_5: 5
   digit_6: 6
   digit_7: 7
+  digit_10: 10
   digit_12: 12
   digit_14: 14
   digit_20: 20
@@ -43,6 +45,7 @@ datetime_formats:
 
 date_format:
   long: "%B %d, %Y"
+  short: "%d/%m/%Y"
 user:
   default_avatar: "user/default_avatar.png"
   avatar_size: "150x150"
@@ -56,3 +59,8 @@ books:
   author_truncated_length: 30
   publisher_truncated_length: 30
   minimum_available_copies: 0
+
+borrowed_book:
+  image:
+    width: 50
+    height: 50

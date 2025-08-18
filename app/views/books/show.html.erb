@@ -15,7 +15,8 @@
       <!-- Nút hành động -->
       <div class="mt-4">
         <%= render partial: "favorite_button", locals: { item: @book } %>
-        <%= button_to t(".borrow"), borrow_book_path(@book), method: :post, form: { data: { turbo: false } }, class: "borrow_button" %>
+        <%= button_tag t(".borrow"), class: "borrow_button", type: "button" %>
+        <%= render "borrow_modal", book: @book %>
       </div>
 
     </div>
@@ -85,7 +86,7 @@
         <h4><strong><%= link_to @book.author.name, author_path(@book.author), class: "text-dark" %></strong></h4>
         <div class="mb-2 text-muted">
           <span><%= t(".no_of_books") %>: <%= @book.author.books.count %></span> |
-          <span><%= t(".no_of_followers") %>: <%= @book.author.favorites.count %></span>
+          <span><%= t(".no_of_followers") %>: 0</span>
         </div>
         <p><%= @book.author.bio.presence || t(".no_bio") %></p>
       </div>

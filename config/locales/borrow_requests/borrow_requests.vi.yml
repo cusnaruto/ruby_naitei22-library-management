@@ -12,6 +12,9 @@ vi:
         rejected: "Bị từ chối"
         returned: "Đã trả"
         overdue: "Quá hạn"
+        expired: "Hết hạn"
+        canceled: "Đã hủy"
+        borrowed: "Đã mượn"
       
       index:
         title: "Quản lý Yêu cầu Mượn sách"
@@ -26,7 +29,7 @@ vi:
 
       show:
         title: "Quản lý chi tiết Yêu cầu Mượn sách"
-        back: "← Quay lại"
+        back: "← Quay lại trang Danh sách yêu cầu"
         request_info:
           full_name: "Họ và tên"
           email: "Email"
@@ -35,10 +38,13 @@ vi:
           request_date: "Ngày yêu cầu"
         status_info:
           actual_return_date_label: "Ngày trả thực tế"
+          actual_borrow_date_label: "Ngày mượn thực tế"
+          approved_date_label: "Ngày duyệt"
           admin_note_label: "Ghi chú của quản trị"
           approved_by_label: "Được duyệt bởi"
           rejected_by_label: "Bị từ chối bởi"
-          returned_by_label: "Được trả bởi"
+          returned_by_label: "Được xác nhận trả bởi"
+          borrowed_by_label: "Được xác nhận mượn bởi"
         book_borrowed:
           title: "Sách đã mượn"
           book_cover: "Ảnh bìa"
@@ -59,10 +65,16 @@ vi:
 
       actual_return_date:
         not_available: "Trống"
+      actual_borrow_date:
+        not_available: "Trống"
+      approved_date:
+        not_available: "Trống"
       admin_note:
         no_note: "Trống"
       approved_by:
         not_approved: "Chưa được xác nhận"
+      borrowed_by:
+        not_borrowed: "Chưa được mượn"
       rejected_by:
         not_rejected: "Chưa bị từ chối"
       returned_by:
@@ -75,10 +87,13 @@ vi:
           rejected: "bị từ chối"
           returned: "đã trả"
           overdue: "quá hạn"
+          expired: "hết hạn"
+          canceled: "đã hủy"
+          borrowed: "đã mượn"
         error:
           admin_note_required: "Ghi chú của quản trị là bắt buộc khi từ chối yêu cầu mượn sách"
           invalid_date: "Vui lòng chọn một ngày hợp lệ"
           date_not_in_future: "Ngày trả thực tế không được là ngày trong tương lai"
-          no_change_status: "Status không có thay đổi"
+          no_change_status: "Trạng thái không có thay đổi"
       flash:
         not_access: "Bạn không có quyền truy cập vào trang này"

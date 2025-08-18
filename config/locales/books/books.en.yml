@@ -37,6 +37,14 @@ en:
     favorite_button:
       unfavorite: "Unfavorite"
       add_to_favorite: "Add to Favorite"
+
+    borrow_modal:
+      add_to_borrow_request: "Add to Borrow Request"
+      total_quantity: "Total Quantity"
+      available_quantity: "Available Quantity"
+      quantity: "Quantity to Borrow"
+      add_to_borrow_list: "Add to Borrow List"
+
     search:
       search_results: "Search Results"
       search_placeholder: "Search by title, author, category, or publisher..."

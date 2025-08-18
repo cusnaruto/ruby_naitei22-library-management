@@ -29,6 +29,8 @@ gender).freeze
   has_many :favorite_books, through: :favorites, source: :favorable,
             source_type: Book.name
 
+  has_many :borrow_requests, dependent: :destroy
+
   has_one_attached :image
 
   attr_accessor :remember_token, :activation_token, :reset_token

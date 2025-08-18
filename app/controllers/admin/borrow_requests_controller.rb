@@ -3,8 +3,17 @@ class Admin::BorrowRequestsController < ApplicationController
   include Pagy::Backend
   helper_method :status_class
 
+  PRELOAD = %i(
+    status
+    admin_note
+    actual_return_date
+    actual_borrow_date
+    approved_date
+  ).freeze
+
   before_action :require_admin
-  before_action :set_borrow_request, only: %i(show edit_status change_status)
+  before_action :set_borrow_request,
+                only: %i(show edit_status change_status)
 
   # GET /admin/borrow_requests
   def index
@@ -51,8 +60,7 @@ class Admin::BorrowRequestsController < ApplicationController
   private
 
   def borrow_request_params
-    params.fetch(:borrow_request, {}).permit(:status, :admin_note,
-                                             :actual_return_date)
+    params.fetch(:borrow_request, {}).permit(*PRELOAD)
   end
 
   def handle_no_change
@@ -77,6 +85,8 @@ class Admin::BorrowRequestsController < ApplicationController
     case new_status
     when :approved
       approved_attributes(prev_status)
+    when :borrowed
+      borrowed_attributes
     when :rejected
       rejected_attributes
     when :returned
@@ -90,8 +100,20 @@ class Admin::BorrowRequestsController < ApplicationController
     attrs = {
       rejected_by_admin_id: nil
     }
-    attrs[:approved_by_admin_id] = current_user.id if prev_status != :approved
+    if prev_status != :approved
+      attrs[:approved_by_admin_id] = current_user.id
+      attrs[:approved_date] =
+        borrow_request_params[:approved_date].presence || Time.current
+    end
     attrs
+  end
+
+  def borrowed_attributes
+    {
+      actual_borrow_date:
+        borrow_request_params[:actual_borrow_date].presence || Time.current,
+      borrowed_by_admin_id: current_user.id
+    }
   end
 
   def rejected_attributes
@@ -102,7 +124,6 @@ class Admin::BorrowRequestsController < ApplicationController
   end
 
   def returned_attributes
-    validate_actual_return_date!(borrow_request_params[:actual_return_date])
     {
       returned_by_admin_id: current_user.id,
       actual_return_date:
@@ -120,33 +141,20 @@ class Admin::BorrowRequestsController < ApplicationController
     end
   end
 
-  def handle_update_error exception
-    @borrow_request.errors.add(:base, exception.message)
+  def handle_update_error _exception
     respond_to do |format|
       format.turbo_stream do
-        render partial: "status_form",
-               formats: [:html],
-               locals: {borrow_request: @borrow_request},
-               status: :unprocessable_entity
+        render turbo_stream: turbo_stream.replace(
+          "status_form_#{@borrow_request.id}",
+          partial: "status_form",
+          formats: [:html],
+          locals: {borrow_request: @borrow_request}
+        ), status: :unprocessable_entity
+      end
+      format.html do
+        render :edit_status, status: :unprocessable_entity
       end
     end
-  end
-
-  def validate_actual_return_date! date_str
-    return if date_str.blank?
-
-    date = begin
-      Date.parse(date_str)
-    rescue StandardError
-      nil
-    end
-    unless date
-      raise ActiveRecord::RecordInvalid.new(@borrow_request),
-            t(".invalid_format")
-    end
-    return unless date > Time.zone.today
-
-    raise ActiveRecord::RecordInvalid.new(@borrow_request), t(".future_date")
   end
 
   # === STOCK METHODS ===

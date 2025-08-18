@@ -59,11 +59,13 @@ class SessionsController < ApplicationController
     redirect_to root_url, status: :see_other
   end
 
-  def login_success user
+  def login_success user # rubocop:disable Metrics/AbcSize
     forwarding_url = session[:forwarding_url]
+    borrow_cart = session[:borrow_cart]
     reset_session
     log_in user
     session[:forwarding_url] = forwarding_url if forwarding_url
+    session[:borrow_cart] = borrow_cart if borrow_cart
     if params.dig(:session,
                   :remember_me) == REMEMBER_ME_SELECTED
       remember user
