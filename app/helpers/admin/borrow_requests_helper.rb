@@ -1,6 +1,9 @@
 # app/helpers/admin/borrow_requests_helper.rb
 module Admin::BorrowRequestsHelper
   STATUS_COLORS = {
+    "expired" => "status-expired",
+    "cancelled" => "status-cancelled",
+    "borrowed" => "status-borrowed",
     "pending" => "status-pending",
     "approved" => "status-approved",
     "rejected" => "status-rejected",
@@ -24,11 +27,13 @@ module Admin::BorrowRequestsHelper
 
     allowed_statuses = case current_status.to_sym
                        when :pending
-                         %i(approved rejected)
+                         %i(approved rejected cancelled)
                        when :approved
-                         %i(returned overdue)
+                         %i(borrowed)
                        when :overdue
                          %i(returned)
+                       when :borrowed
+                         %i(returned overdue)
                        else
                          []
                        end
