@@ -55,7 +55,32 @@ write_a_review)
   end
 
   # POST /books/:id/borrow
-  def borrow; end
+  def borrow # rubocop:disable Metrics/AbcSize
+    session[:borrow_cart] ||= []
+
+    book_id = @book.id
+    quantity = params[:quantity].to_i
+
+    existing_item = session[:borrow_cart].find do |item|
+      item["book_id"] == book_id
+    end
+    if existing_item
+      existing_item["quantity"] += quantity
+    else
+      session[:borrow_cart] << {
+        "book_id" => book_id,
+        "quantity" => quantity
+      }
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html do
+        redirect_to book_path @book,
+                              notice: t(".added_to_borrow_cart")
+      end
+    end
+  end
 
   # POST /books/:id/add_to_favorite
   def add_to_favorite

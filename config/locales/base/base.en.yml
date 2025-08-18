@@ -11,6 +11,9 @@ en:
       header:
         one: "1 error prevented %{model} from being saved"
         other: "%{count} errors prevented %{model} from being saved"
+  
+  auth:
+    please_login: "Please log in to access this page."
 
   time:
     formats:
