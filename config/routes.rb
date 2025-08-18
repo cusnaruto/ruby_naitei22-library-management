@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :new, :create, :edit, :update] do
       member do
         get :favorites
+        get :follows
         get :setup_password
         patch :update_password
       end

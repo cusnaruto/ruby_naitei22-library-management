@@ -21,7 +21,7 @@
         <div class="nav-item"><%= link_to "🏠 #{t("sidebar.home")}", root_path, class: "nav-link #{"active" if current_page?(root_path)}" %></div>
         <div class="nav-item"><%= link_to "🔍 #{t("sidebar.search")}", search_books_path, class: "nav-link" %></div>
         <div class="nav-item"><%= link_to "⭐ #{t("sidebar.favorite")}", favorites_user_path(current_user), class: "nav-link" %></div>
-        <div class="nav-item"><%= link_to "👤 #{t("sidebar.follow")}", "#", class: "nav-link" %></div>
+        <div class="nav-item"><%= link_to "👤 #{t("sidebar.follow")}", follows_user_path(current_user), class: "nav-link" %></div>
         <div class="nav-item"><%= link_to "📚 #{t("sidebar.borrow_list")}", borrow_request_index_path, class: "nav-link #{'active' if current_page?(borrow_request_index_path)}" %></div>
       </nav>
     <% end %>
@@ -66,17 +66,6 @@
   <% else %>
     <div class="left-content">
       <span class="fw-bold fs-5">👤 <%= t("topbar.guest") %></span>
-    </div>
-
-    <div class="search-bar flex-grow-1 mx-4">
-      <%= form_with url: search_books_path, method: :get, local: true, class: "d-flex" do |f| %>
-        <%= f.text_field :q,
-            placeholder: t("topbar.search_placeholder"),
-            class: "form-control me-2 flex-grow-1 search-input" %>
-        <div>
-          <%= f.submit t("topbar.search"), class: "btn btn-dark search-submit-btn" %>
-        </div>
-      <% end %>
     </div>
 
     <div class="right-buttons">
