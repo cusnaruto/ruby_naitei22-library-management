@@ -39,9 +39,6 @@ vi:
       confirmations:
         delete: "Bạn có chắc chắn muốn xóa?"
 
-      form:
-        errors: "%{count} lỗi khiến sách không được lưu:"
-
       prompts:
         select_author: "Chọn tác giả"
         select_publisher: "Chọn nhà xuất bản"
@@ -54,6 +51,7 @@ vi:
         total_quantity: "Số lượng"
         available_quantity: "Số lượng có sẵn"
         borrow_count: "Số lần mượn"
+        category: "Danh mục"
         created_at: "Ngày tạo"
         author: "Tác giả"
         publisher: "Nhà xuất bản"

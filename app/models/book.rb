@@ -83,6 +83,10 @@ class Book < ApplicationRecord
     reviews.average(:score).round(1)
   end
 
+  def self.ransackable_attributes(*)
+    %w(title)
+  end
+
   scope :search, lambda {|query, search_type = :all|
     return none if query.blank?
 

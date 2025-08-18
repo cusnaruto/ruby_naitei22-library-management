@@ -6,9 +6,9 @@
   <%= link_to t("admin.books.actions.add"), new_admin_book_path, class: "btn btn-warning fw-bold" %>
 
   <div class="d-flex">
-    <%= form_with url: admin_books_path, method: :get, local: true, class: "d-flex" do %>
-      <%= text_field_tag :q, params[:q], placeholder: t("admin.books.placeholders.search"), class: "form-control me-2" %>
-      <%= submit_tag t("admin.books.actions.search"), class: "btn btn-primary search-btn" %>
+    <%= search_form_for @q, url: admin_books_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.search_field :title_cont, placeholder: t("admin.books.placeholders.search"), class: "form-control me-2" %>
+      <%= f.submit t("admin.books.actions.search"), class: "btn btn-primary search-btn" %>
     <% end %>
   </div>
 </div>

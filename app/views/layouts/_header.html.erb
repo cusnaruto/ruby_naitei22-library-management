@@ -13,7 +13,7 @@
         <div class="nav-item"><%= link_to "📥 #{t('sidebar.borrow_requests')}", admin_borrow_requests_path, class: "nav-link #{'active' if current_page?(admin_borrow_requests_path)}" %></div>
         <div class="nav-item"><%= link_to "📚 #{t('sidebar.books')}", admin_books_path, class: "nav-link #{"active" if params[:controller] == "admin/books"}" %></div>
         <div class="nav-item"><%= link_to "✍️ #{t('sidebar.authors')}", admin_authors_path, class: "nav-link #{"active" if params[:controller] == "admin/authors"}" %></div>
-        <div class="nav-item"><%= link_to "🗂 #{t('sidebar.categories')}", "#", class: "nav-link" %></div>
+        <div class="nav-item"><%= link_to "🗂 #{t('sidebar.categories')}", admin_categories_path, class: "nav-link #{"active" if params[:controller] == "admin/categories"}" %></div>
         <div class="nav-item"><%= link_to "🏢 #{t('sidebar.publishers')}", admin_publishers_path, class: "nav-link #{"active" if params[:controller] == "admin/publishers"}" %></div>
       </nav>
     <% else %>
