@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_08_18_033029) do
+ActiveRecord::Schema[7.0].define(version: 2025_08_19_153118) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -168,6 +168,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_08_18_033029) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_digest"], name: "index_users_on_remember_digest"
     t.index ["reset_digest"], name: "index_users_on_reset_digest"
