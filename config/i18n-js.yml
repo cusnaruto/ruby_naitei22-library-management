@@ -4,3 +4,5 @@ translations:
     only: 
       - "en.admin.borrow_requests.status_form_js"
       - "vi.admin.borrow_requests.status_form_js"
+      - "en.books.review_form.missing_score"
+      - "vi.books.review_form.missing_score"
