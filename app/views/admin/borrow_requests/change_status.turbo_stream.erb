@@ -52,3 +52,15 @@
       locals: { borrow_request: @borrow_request }
 ) %>
 
+<%= turbo_stream.replace "flash" do %>
+  <% if flash.any? %>
+    <div id="flash">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type == "notice" ? "success" : "danger" %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+

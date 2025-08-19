@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4">
   <h3 class="fw-bold mb-4 text-center"><%= t(".title") %></h3>
 
   <% if @users.any? %>
@@ -20,11 +20,10 @@
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td>
-                <%= link_to t(".view"), "#", class: "btn btn-sm btn-primary" %>
+                <%= link_to t(".view"), admin_user_path(user), class: "btn btn-sm btn-primary" %>
               </td>
               <td>
-                <% status_class = user.active? ? "badge bg-success" : "badge bg-danger" %>
-                <span class="<%= status_class %>">
+                <span class="badge <%= user_status_color(user.status) %>">
                   <%= user.status.capitalize %>
                 </span>
               </td>

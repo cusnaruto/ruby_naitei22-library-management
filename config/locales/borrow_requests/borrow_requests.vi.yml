@@ -29,7 +29,7 @@ vi:
 
       show:
         title: "Quản lý chi tiết Yêu cầu Mượn sách"
-        back: "← Quay lại"
+        back: "← Quay lại trang Danh sách yêu cầu"
         request_info:
           full_name: "Họ và tên"
           email: "Email"

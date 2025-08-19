@@ -40,17 +40,15 @@ class Admin::BorrowRequestsController < ApplicationController
 
     BorrowRequest.transaction do
       @borrow_request.update!(
-        borrow_request_params.merge(status_extra_attributes(prev_status,
-                                                            new_status))
+        borrow_request_params.merge(
+          status_extra_attributes(prev_status, new_status)
+        )
       )
-      case new_status
-      when :approved
-        decrement_book_stock if prev_status != :approved
-      when :returned
-        increment_book_stock if prev_status != :returned
-      end
+
+      handle_stock_change(prev_status, new_status)
     end
 
+    flash.now[:notice] = t(".status_updated")
     @borrow_request.reload
     respond_to_success
   rescue ActiveRecord::RecordInvalid => e
@@ -58,6 +56,15 @@ class Admin::BorrowRequestsController < ApplicationController
   end
 
   private
+
+  def handle_stock_change prev_status, new_status
+    case new_status
+    when :approved
+      decrement_book_stock if prev_status != :approved
+    when :returned
+      increment_book_stock if prev_status != :returned
+    end
+  end
 
   def borrow_request_params
     params.fetch(:borrow_request, {}).permit(*PRELOAD)
