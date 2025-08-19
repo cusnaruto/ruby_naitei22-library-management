@@ -51,7 +51,8 @@ class Admin::CategoriesController < Admin::ApplicationController
     if @category.destroy
       flash[:success] = t("admin.categories.flash.destroy.success")
     else
-      flash[:alert] = t("admin.categories.flash.destroy.failure")
+      flash[:alert] = @category.errors.full_messages.to_sentence ||
+                      t("admin.categories.flash.destroy.failure")
     end
     redirect_to admin_categories_path
   end

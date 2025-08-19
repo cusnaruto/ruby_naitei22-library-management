@@ -8,3 +8,5 @@ import "custom/write_review";
 import "modals/login_modal";
 import "utils/time_display";
 window.hideModal = hideModal
+import "chartkick"
+import "Chart.bundle"

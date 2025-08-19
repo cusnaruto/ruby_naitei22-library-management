@@ -73,6 +73,19 @@ en:
             death_date:
               after_birth: "Death date must be after the birth date"
               in_future: "Death date can't be in the future"
+            base:
+              restrict_dependent_destroy:
+                has_many: "Cannot delete this author because books are still associated."
+        publisher:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: "Cannot delete this publisher because books are still associated."
+        category:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: "Cannot delete this category because books are still associated."
         borrow_request:
           attributes:
             end_date:

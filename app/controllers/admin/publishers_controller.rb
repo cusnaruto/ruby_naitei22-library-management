@@ -54,7 +54,8 @@ class Admin::PublishersController < Admin::ApplicationController
     if @publisher.destroy
       flash[:success] = t("admin.publishers.flash.destroy.success")
     else
-      flash[:alert] = t("admin.publishers.flash.destroy.failure")
+      flash[:alert] = @publisher.errors.full_messages.to_sentence ||
+                      t("admin.publishers.flash.destroy.failure")
     end
     redirect_to admin_publishers_path
   end

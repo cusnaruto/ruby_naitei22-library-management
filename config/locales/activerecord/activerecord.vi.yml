@@ -73,6 +73,19 @@ vi:
             death_date:
               after_birth: "Ngày mất phải sau ngày sinh"
               in_future: "Ngày mất không được ở tương lai"
+            base:
+              restrict_dependent_destroy:
+                has_many: "Không thể xóa tác giả này vì vẫn còn sách liên kết."
+        publisher:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: "Không thể xóa nhà xuất bản này vì vẫn còn sách liên kết."
+        category:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: "Không thể xóa thể loại này vì vẫn còn sách liên kết."
         borrow_request:
           attributes:
             end_date:

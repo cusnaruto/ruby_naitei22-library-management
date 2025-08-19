@@ -2,7 +2,7 @@ class Category < ApplicationRecord
   MAX_NAME_LENGTH = 100
   MAX_DESCRIPTION_LENGTH = 500
 
-  has_many :book_categories, dependent: :destroy
+  has_many :book_categories, dependent: :restrict_with_error
   has_many :books, through: :book_categories
 
   validates :name,

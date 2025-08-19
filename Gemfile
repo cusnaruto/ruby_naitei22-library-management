@@ -97,4 +97,6 @@ end
 gem "ransack"
 gem "ruby-lsp", "~> 0.26.1"
 
+gem "chartkick"
+gem "groupdate"
 gem "whenever", require: false
