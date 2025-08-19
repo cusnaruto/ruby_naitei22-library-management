@@ -35,6 +35,7 @@ vi:
         search: "Tìm kiếm theo tên sách"
         no_description: "Không có mô tả"
         no_cover_image: "Không có hình ảnh bìa sách"
+        no_category: "Không có danh mục"
 
       confirmations:
         delete: "Bạn có chắc chắn muốn xóa?"
@@ -51,8 +52,8 @@ vi:
         total_quantity: "Số lượng"
         available_quantity: "Số lượng có sẵn"
         borrow_count: "Số lần mượn"
-        category: "Danh mục"
         created_at: "Ngày tạo"
+        category: "Thể loại"
         author: "Tác giả"
         publisher: "Nhà xuất bản"
         action: "Hành động"
