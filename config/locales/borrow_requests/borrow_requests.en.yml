@@ -29,7 +29,7 @@ en:
 
       show:
         title: "Borrow requests items Management"
-        back: "← Back"
+        back: "← Back to Borrow Requests List"
         request_info: 
           full_name: "Full name"
           email: "Email"

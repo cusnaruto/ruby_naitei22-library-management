@@ -67,7 +67,6 @@ class BorrowRequest < ApplicationRecord
   validate :end_date_after_start_date
   validate :admin_note_required_if_rejected, if: :rejected?
   validate :returned_date_required_if_return, if: :returned?
-  validate :actual_return_date_before_end_date, if: :returned?
   validate :actual_return_date_cannot_be_future
   validate :actual_return_after_borrow_date
   validate :approved_date_before_start_date
@@ -168,14 +167,6 @@ class BorrowRequest < ApplicationRecord
     return unless actual_return_date > Time.zone.today
 
     errors.add(:actual_return_date, :cannot_be_future)
-  end
-
-  def actual_return_date_before_end_date
-    return if actual_return_date.blank? || end_date.blank?
-
-    return unless actual_return_date > end_date
-
-    errors.add(:actual_return_date, :before_end_date)
   end
 
   def approved_date_before_start_date
