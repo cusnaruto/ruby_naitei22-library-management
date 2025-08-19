@@ -56,8 +56,16 @@ Rails.application.routes.draw do
         post :add_to_favorite
         delete :remove_from_favorite
         post :write_a_review
+        delete :destroy_review
       end
     end
+    resources :authors, only: [:show] do
+      member do
+        post :add_to_favorite
+        delete :remove_from_favorite
+      end
+    end
+
     resources :authors, only: [:show] do
       member do
         post :add_to_favorite

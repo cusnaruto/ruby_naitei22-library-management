@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
   before_action :set_book,
                 only: %i(show borrow add_to_favorite remove_from_favorite
-write_a_review)
+write_a_review destroy_review)
   before_action :set_recommended_books, only: :show
   before_action :set_review_stats, only: :show
   before_action :set_reviews, only: :show
   before_action :load_favorite, only: %i(add_to_favorite remove_from_favorite)
+  before_action :set_user_review, only: %i(show write_a_review destroy_review)
 
   BOOK_INCLUDES = %i(author publisher categories).freeze
   BOOK_INCLUDES_WITH_IMAGE = [:author, :publisher, :categories,
@@ -123,7 +124,57 @@ write_a_review)
   end
 
   # POST /books/:id/write_a_review
-  def write_a_review; end
+  def write_a_review
+    @user_review ||= current_user.reviews.new(book: @book)
+
+    @user_review.assign_attributes(review_params)
+
+    if @user_review.save
+      refresh_review_stats
+      respond_to do |format|
+        format.turbo_stream
+        format.html {redirect_to book_path(@book)}
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "review_section",
+            partial: "books/review_section",
+            locals: {book: @book, review: @user_review}
+          )
+        end
+        format.html {render :show}
+      end
+    end
+  end
+
+  # DELETE /books/:id/destroy_review
+  def destroy_review
+    if @user_review&.destroy
+      refresh_review_stats
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html do
+          redirect_to book_path(@book),
+                      notice: t(".deleted_success")
+        end
+      end
+    else
+      flash.now[:error] = t(".delete_failed")
+
+      respond_to do |format|
+        format.turbo_stream do
+          render :destroy_review, status: :unprocessable_entity
+        end
+        format.html do
+          redirect_to book_path(@book),
+                      alert: t(".delete_failed")
+        end
+      end
+    end
+  end
 
   private
 
@@ -151,8 +202,11 @@ write_a_review)
   end
 
   def set_reviews
+    reviews_scope = @book.reviews.recent.includes(:user)
+    reviews_scope = reviews_scope.excluding_user(current_user) if current_user
+
     @pagy_reviews, @reviews = pagy(
-      @book.reviews.includes(:user).order(created_at: :desc),
+      reviews_scope,
       items: Settings.digits.digit_5,
       page_param: :reviews_page,
       overflow: :last_page
@@ -163,8 +217,34 @@ write_a_review)
     @favorite = current_user.favorites.find_by(favorable: @book)
   end
 
+  def set_user_review
+    return unless current_user
+
+    @user_review = current_user.reviews.find_by(book_id: params[:id])
+  end
+
+  def refresh_review_stats
+    @review_counts = @book.reviews.group(:score).count
+    @total_reviews = @book.reviews.count
+  end
+
+  def render_favorite_success format, message_key
+    format.turbo_stream do
+      render turbo_stream: turbo_stream.replace(
+        "favorite_button_#{@book.model_name.singular}_#{@book.id}",
+        partial: "books/favorite_button",
+        locals: {item: @book}
+      )
+    end
+    format.html {redirect_to @book, notice: t(".#{message_key}")}
+  end
+
   def normalize_search_type search_type
     search_type_sym = search_type&.to_sym
     SEARCH_TYPES.key?(search_type_sym) ? search_type_sym : DEFAULT_SEARCH_TYPE
+  end
+
+  def review_params
+    params.require(:review).permit(:score, :comment)
   end
 end

@@ -24,6 +24,7 @@ vi:
       what_do_you_think: "Bạn nghĩ gì?"
       rate_this_book: "Đánh giá cuốn sách này"
       write_a_review: "Viết nhận xét"
+      update_review: "Cập nhật đánh giá"
       community_reviews: "Nhận xét của cộng đồng"
       stars: "sao"
       readers_reviews: "Nhận xét của độc giả"
@@ -44,6 +45,25 @@ vi:
       available_quantity: "Số lượng hiện có"
       quantity: "Số lượng muốn mượn"
       add_to_borrow_list: "Thêm vào giỏ mượn"
+    
+    review_section:
+      your_reviewed: "Bạn đã đánh giá"
+      delete_review: "Xóa đánh giá"
+      are_you_sure: "Bạn có chắc chắn không?"
+      update_review: "Cập nhật đánh giá"
+      write_review: "Viết đánh giá"
+
+    review_form:
+      your_review: "Đánh giá của bạn"
+      submit_review: "Gửi đánh giá"
+      cancel: "Hủy"
+      update_review: "Cập nhật đánh giá"
+      missing_score: "Vui lòng chọn số sao cho đánh giá!"
+    
+    destroy_review:
+      review_not_found: "Không tìm thấy đánh giá."
+      deleted: "Xóa đánh giá thành công."
+      delete_failed: "Xóa đánh giá thất bại."
 
     search:
       search_results: "Kết Quả Tìm Kiếm"
