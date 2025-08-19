@@ -84,9 +84,7 @@ gender).freeze
   end
 
   def ordered_favorite_books_with_includes
-    favorite_books.includes(:author, :publisher, :categories,
-                            image_attachment: :blob)
-                  .joins(:favorites)
+    favorite_books.includes(FAVORITE_BOOKS_INCLUDES)
                   .order("favorites.created_at DESC")
   end
 

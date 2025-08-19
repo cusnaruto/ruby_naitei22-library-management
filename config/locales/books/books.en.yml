@@ -24,6 +24,7 @@ en:
       what_do_you_think: "What Do You Think?"
       rate_this_book: "Rate This Book"
       write_a_review: "Write a Review"
+      update_review: "Update review"
       community_reviews: "Community Reviews"
       stars: "stars"
       readers_reviews: "Readers Reviews"
@@ -44,6 +45,25 @@ en:
       available_quantity: "Available Quantity"
       quantity: "Quantity to Borrow"
       add_to_borrow_list: "Add to Borrow List"
+    
+    review_section:
+      your_reviewed: "Your review"
+      delete_review: "Delete review"
+      are_you_sure: "Are you sure?"
+      update_review: "Update review"
+      write_review: "Write a review"
+    
+    review_form:
+      your_review: "Your review"
+      submit_review: "Submit review"
+      cancel: "Cancel"
+      update_review: "Update review"
+      missing_score: "Please select a star rating for your review!"
+    
+    destroy_review:
+      review_not_found: "Review not found."
+      deleted: "Review deleted successfully."
+      delete_failed: "Failed to delete the review."
 
     search:
       search_results: "Search Results"

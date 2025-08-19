@@ -430,9 +430,9 @@ books = [
     available_quantity: book_data[:available_quantity],
     borrow_count: book_data[:total_quantity] - book_data[:available_quantity]
   )
-  
+
   book_data[:categories].each { |cat| book.categories << cat }
-  
+
   # Attach cover image
   attach_image.call(book)
   book
@@ -478,35 +478,108 @@ favorites = []
 end
 
 Favorite.insert_all(favorites)
+puts "📋 Đang tạo yêu cầu mượn sách..."
 
-puts "⭐ Đang tạo mượn sách..."
-users = (1..30).to_a
-books = (1..30).to_a
+# Generate 200 borrow requests with various statuses and realistic dates
+200.times do |i|
+  user_id = users.sample.id
+  request_date = rand(60.days).seconds.ago
+  start_date = request_date.to_date + rand(1..7).days
+  end_date = start_date + rand(7..30).days
 
-10.times do |i|
-  borrow_request = BorrowRequest.create!(
-    user_id: users[i % users.size],
-    request_date: Date.new(2025, 8, i + 1),
-    status: 0,
-    start_date: Time.zone.now - 4.days,
-    end_date: Time.zone.now - 1.day,
-    actual_return_date: nil,
-    admin_note: nil,
-    approved_by_admin_id: nil
-  )
+  # Determine status based on dates and randomization
+  status = if end_date < Date.current && rand < 0.1
+             [:overdue, :expired].sample
+           elsif start_date < Date.current && rand < 0.3
+             [:borrowed, :returned].sample
+           elsif request_date.to_date < Date.current && rand < 0.2
+             [:approved, :rejected].sample
+           else
+             :pending
+           end
 
-  BorrowRequestItem.create!(
-    borrow_request_id: borrow_request.id,
-    book_id: books[(i * 2) % books.size],
-    quantity: 1
-  )
+  # Set dates based on status with proper validation
+  approved_date = nil
+  actual_borrow_date = nil
+  actual_return_date = nil
 
-  BorrowRequestItem.create!(
-    borrow_request_id: borrow_request.id,
-    book_id: books[(i * 2 + 1) % books.size],
-    quantity: 1
-  )
+  if status.in?([:approved, :borrowed, :returned, :overdue])
+    # Approved date must be after request date and before start date
+    approved_date = [request_date.to_date + rand(1..3).days, start_date - 1.day].min
+  end
+
+  if status.in?([:borrowed, :returned, :overdue])
+    # Actual borrow date must be after start date and after approved date
+    min_borrow_date = [start_date, approved_date].compact.max
+    actual_borrow_date = min_borrow_date + rand(0..2).days
+
+    # Ensure actual_borrow_date is not after end_date for validation
+    actual_borrow_date = [actual_borrow_date, end_date - 1.day].min
+  end
+
+  if status == :returned
+    # Actual return date must be after actual_borrow_date and not in the future
+    min_return_date = actual_borrow_date + 1.day
+    max_return_date = [end_date + rand(1..10).days, Date.current - 1.day].min
+
+    # Only set return date if we have a valid range
+    if min_return_date <= max_return_date
+      actual_return_date = min_return_date + rand(0..(max_return_date - min_return_date).to_i).days
+    else
+      # If we can't set a valid return date, change status to borrowed
+      status = :borrowed
+      actual_return_date = nil
+    end
+  end
+
+  # Admin assignments
+  admin_id = status.in?([:approved, :borrowed, :returned, :overdue]) ? admin.id : nil
+  rejected_admin_id = status == :rejected ? admin.id : nil
+
+  begin
+    borrow_request = BorrowRequest.create!(
+      user_id: user_id,
+      request_date: request_date,
+      status: status,
+      start_date: start_date,
+      end_date: end_date,
+      actual_return_date: actual_return_date,
+      admin_note: status == :rejected ? "Không đủ điều kiện mượn sách" : nil,
+      approved_by_admin_id: admin_id,
+      rejected_by_admin_id: rejected_admin_id,
+      returned_by_admin_id: status == :returned ? admin.id : nil,
+      borrowed_by_admin_id: status.in?([:borrowed, :returned, :overdue]) ? admin.id : nil,
+      approved_date: approved_date,
+      actual_borrow_date: actual_borrow_date
+    )
+
+    # Create 1-3 borrow request items per request
+    num_books = rand(1..3)
+    selected_books = books.sample(num_books)
+
+    selected_books.each do |book|
+      BorrowRequestItem.create!(
+        borrow_request_id: borrow_request.id,
+        book_id: book.id,
+        quantity: 1
+      )
+    end
+
+    # Update book quantities for borrowed/overdue books
+    if status.in?([:borrowed, :overdue])
+      selected_books.each do |book|
+        book.update!(
+          available_quantity: [book.available_quantity - 1, 0].max,
+          borrow_count: book.borrow_count + 1
+        )
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    puts "⚠️  Skipping invalid borrow request #{i + 1}: #{e.message}"
+    next
+  end
 end
+
 puts "🎉 Hoàn thành tạo dữ liệu mẫu!"
 puts "📊 Thống kê:"
 puts "- 📚 Sách: #{Book.count}"
@@ -515,6 +588,15 @@ puts "- 🏢 Nhà xuất bản: #{Publisher.count}"
 puts "- 🏷️ Thể loại: #{Category.count}"
 puts "- 👥 Người dùng: #{User.count}"
 puts "- ⭐ Đánh giá: #{Review.count}"
+puts "- 📋 Yêu cầu mượn sách: #{BorrowRequest.count}"
+puts "- 📖 Chi tiết mượn sách: #{BorrowRequestItem.count}"
+
+# Display borrow request statistics
+puts "\n📋 Thống kê yêu cầu mượn sách:"
+BorrowRequest.statuses.each do |status, _|
+  count = BorrowRequest.where(status: status).count
+  puts "- #{status.humanize}: #{count}"
+end
 
 puts "\n🔑 Thông tin đăng nhập:"
 puts "- Admin: admin@thuvien.com / 123456"

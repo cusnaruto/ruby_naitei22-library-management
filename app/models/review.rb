@@ -14,4 +14,5 @@ class Review < ApplicationRecord
   validates :user_id, uniqueness: {scope: :book_id}
 
   scope :recent, -> {order(created_at: :desc)}
+  scope :excluding_user, ->(user) {where.not(user:) if user}
 end

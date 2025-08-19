@@ -31,6 +31,29 @@
 /* ===============================
    Rating & Reviews
 ================================== */
+.review-avatar{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.star-rating {
+  display: inline-block;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc; /* mặc định xám */
+  transition: color 0.2s;
+}
+
+.star:hover,
+.star.hover,
+.star.selected {
+  color: gold; /* vàng khi hover hoặc chọn */
+}
+
 .rating_and_reviews_avatar {
   width: 40px;
   height: 40px;
