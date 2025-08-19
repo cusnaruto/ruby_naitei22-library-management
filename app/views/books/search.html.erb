@@ -1,26 +1,31 @@
 <% provide :title, t(".search_results") %>
 
 <div class="container mt-4">
-  <!-- Search Form -->
-  <div class="row justify-content-center mb-4">
-    <div class="col-md-10">
-      <%= form_with url: search_books_path, method: :get, local: true, class: "d-flex gap-2" do |f| %>
+<!-- Search Form -->
+<div class="row justify-content-center mb-4">
+  <div class="col-md-10">
+    <%= form_with url: search_books_path, method: :get, local: true, class: "search-form-container" do |f| %>
+      <!-- First row: Search type and input field -->
+      <div class="d-flex gap-2 mb-3">
         <%= f.select :search_type,
             search_type_options_for_select(@search_type),
             {},
-            { class: "form-select w-auto" } %>
+            { class: "form-select" } %>
 
         <%= f.text_field :q,
             value: @query,
             placeholder: t(".search_placeholder"),
-            class: "form-control flex-grow-1",
+            class: "form-control",
             autocomplete: "off" %>
+      </div>
 
-        <%= f.submit t("topbar.search"), class: "btn btn-dark rounded-pill px-4" %>
-      <% end %>
-    </div>
+      <!-- Second row: Search button centered -->
+      <div class="d-flex justify-content-center">
+        <%= f.submit t("topbar.search"), class: "btn btn-dark px-5" %>
+      </div>
+    <% end %>
   </div>
-
+</div>
   <!-- Search Results -->
   <div class="row">
     <div class="col-12">
@@ -61,9 +66,9 @@
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card h-100 shadow-sm">
             <% if book.image.attached? %>
-              <%= image_tag book.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+              <%= image_tag book.image, class: "card-img-top", style: "height: 350px; object-fit: contain;" %>
             <% else %>
-              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 350px;">
                 <span class="text-muted fs-1">📚</span>
               </div>
             <% end %>

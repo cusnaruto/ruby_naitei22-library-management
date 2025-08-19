@@ -4,8 +4,10 @@ gender).freeze
   USER_OAUTH_SETUP_PERMIT = %i(password password_confirmation date_of_birth
 gender).freeze
   USER_PERMIT_FOR_PASSWORD_RESET = %i(password password_confirmation).freeze
-  USER_PERMIT_FOR_PROFILE = %i(name email password password_confirmation
-                               date_of_birth gender phone_number address).freeze
+  FAVORITE_BOOKS_INCLUDES = [:author, :publisher, :categories,
+{image_attachment: :blob}].freeze
+  FAVORITE_AUTHORS_INCLUDES = [:books, :favorites,
+{image_attachment: :blob}].freeze
 
   has_secure_password
   # has_secure_password cung cấp: # rubocop:disable Style/AsciiComments
@@ -28,6 +30,10 @@ gender).freeze
   has_many :favorites, dependent: :destroy
   has_many :favorite_books, through: :favorites, source: :favorable,
             source_type: Book.name
+  has_many :favorite_authors, -> {where(favorable_type: Author.name)},
+           class_name: Favorite.name, dependent: :destroy
+  has_many :followed_authors, through: :favorite_authors, source: :favorable,
+           source_type: Author.name
 
   has_many :borrow_requests, dependent: :destroy
 
@@ -75,6 +81,17 @@ gender).freeze
 
   def favorited? item
     favorites.exists?(favorable: item)
+  end
+
+  def ordered_favorite_books_with_includes
+    favorite_books.includes(:author, :publisher, :categories,
+                            image_attachment: :blob)
+                  .joins(:favorites)
+                  .order("favorites.created_at DESC")
+  end
+
+  def ordered_favorite_authors_with_includes
+    followed_authors.includes(FAVORITE_AUTHORS_INCLUDES)
   end
 
   def date_of_birth_must_be_within_last_100_years

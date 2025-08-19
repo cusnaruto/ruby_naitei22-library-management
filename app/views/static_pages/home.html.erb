@@ -18,9 +18,10 @@
       <%= f.text_field :q,
           value: params[:q],
           placeholder: t(".search_placeholder"),
-          class: "form-control form-control-lg border-start-0 border-end-0 rounded-0 px-5" %>
+          class: "form-control form-control-lg border-start-0 border-end-0 rounded-0 px-5",
+          style: "min-width: 250px;" %>
 
-      <%= f.submit "🔍", class: "btn btn-danger btn-lg rounded-end-5 px-4" %>
+      <%= f.submit "🔍", class: "btn btn-danger rounded-end-5 px-4 home-search-btn" %>
     <% end %>
   </div>
 </div>

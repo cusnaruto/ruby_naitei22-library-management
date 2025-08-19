@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user,
                 only: %i(show edit update setup_password update_password)
-  before_action :load_user, only: %i(show edit update)
+  before_action :load_user, only: %i(show edit update follows)
   before_action :correct_user, only: %i(show edit update)
   before_action :require_password_setup,
                 only: %i(setup_password update_password)
@@ -65,6 +65,16 @@ blob).freeze
     )
 
     @favorite_stats = calculate_favorite_stats(@user)
+  end
+
+  # GET /users/:id/follows
+  def follows
+    authors_with_includes = @user.ordered_favorite_authors_with_includes
+
+    @pagy, @favorite_authors = pagy(authors_with_includes,
+                                    items: Settings.pagy.items)
+
+    @author_stats = calculate_author_stats(@favorite_authors)
   end
 
   # GET /users/setup_password
@@ -138,6 +148,18 @@ blob).freeze
       user.favorite_books.joins(:categories).distinct.count(CATEGORY_ID),
       unique_publishers:
       user.favorite_books.joins(:publisher).distinct.count(PUBLISHER_ID)
+    }
+  end
+
+  def calculate_author_stats authors
+    return {total_books: 0, avg_books: 0} if authors.empty?
+
+    total_books = authors.sum {|author| author.books.size}
+    avg_books = (total_books / authors.count.to_f).round(1)
+
+    {
+      total_books:,
+      avg_books:
     }
   end
 end
