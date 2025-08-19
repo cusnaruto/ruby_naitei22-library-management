@@ -34,22 +34,11 @@ class Admin::BorrowRequestsController < ApplicationController
   # PATCH /admin/borrow_requests/:id/change_status
   def change_status
     prev_status = @borrow_request.status.to_sym
-    new_status  = borrow_request_params[:status].to_sym
+    new_status = borrow_request_params[:status].to_sym
 
     return handle_no_change if new_status == prev_status
 
-    BorrowRequest.transaction do
-      @borrow_request.update!(
-        borrow_request_params.merge(
-          status_extra_attributes(prev_status, new_status)
-        )
-      )
-
-      handle_stock_change(prev_status, new_status)
-    end
-
-    flash.now[:notice] = t(".status_updated")
-    @borrow_request.reload
+    update_borrow_request_status(prev_status, new_status)
     respond_to_success
   rescue ActiveRecord::RecordInvalid => e
     handle_update_error(e)
@@ -186,5 +175,51 @@ class Admin::BorrowRequestsController < ApplicationController
 
     flash[:alert] = t(".flash.no_access")
     redirect_to root_path
+  end
+
+  def update_borrow_request_status prev_status, new_status
+    BorrowRequest.transaction do
+      update_request_attributes(prev_status, new_status)
+      handle_status_side_effects(prev_status, new_status)
+    end
+
+    flash.now[:notice] = t(".status_updated")
+    @borrow_request.reload
+  end
+
+  def update_request_attributes prev_status, new_status
+    @borrow_request.update!(
+      borrow_request_params.merge(
+        status_extra_attributes(prev_status, new_status)
+      )
+    )
+  end
+
+  def handle_status_side_effects prev_status, new_status
+    case new_status
+    when :approved
+      handle_approved_status(prev_status)
+    when :rejected
+      send_status_notification_email(new_status)
+    when :returned
+      increment_book_stock if prev_status != :returned
+    end
+  end
+
+  def handle_approved_status prev_status
+    decrement_book_stock if prev_status != :approved
+    send_status_notification_email(:approved)
+  end
+
+  def send_status_notification_email status
+    case status
+    when :approved
+      UserMailer.borrow_request_approved(@borrow_request).deliver_later
+    when :rejected
+      UserMailer.borrow_request_rejected(@borrow_request).deliver_later
+    end
+  rescue StandardError => e
+    Rails.logger.error
+    "Failed to send borrow request #{status} email: #{e.message}"
   end
 end

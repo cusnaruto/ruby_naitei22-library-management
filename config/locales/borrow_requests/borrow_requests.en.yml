@@ -1,5 +1,5 @@
 en:
-  admin: 
+  admin:
     borrow_requests:
       status_form:
         save: "Save"
@@ -15,8 +15,8 @@ en:
         expired: "Expired"
         canceled: "Canceled"
         borrowed: "Borrowed"
-      
-      index: 
+
+      index:
         title: "Borrow Requests Management"
         id: "ID"
         username: "Username"
@@ -29,14 +29,14 @@ en:
 
       show:
         title: "Borrow requests items Management"
-        back: "← Back to Borrow Requests List"
-        request_info: 
+        back: "← Back"
+        request_info:
           full_name: "Full name"
           email: "Email"
           start_date: "Start date"
           end_date: "End date"
           request_date: "Request date"
-        status_info: 
+        status_info:
           actual_return_date_label: "Actual return date"
           actual_borrow_date_label: "Actual borrowed date"
           approved_date_label: "Approved date"
@@ -55,7 +55,7 @@ en:
           no_books: "No books borrowed"
 
       status_change: "Status change"
-      change_status: 
+      change_status:
         title: "Change status"
         no_change: "No changes made to the status"
         status_updated: "Status updated successfully"
