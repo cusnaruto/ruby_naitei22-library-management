@@ -40,4 +40,19 @@ module Admin::BorrowRequestsHelper
 
     ([current_status] + allowed_statuses).uniq
   end
+
+  def borrow_request_search_inputs
+    [
+      {attr: :id_eq, type: :number, label: t(".search_id"),
+       placeholder: t(".search_id_placeholder")},
+      {attr: :user_name_cont, type: :search, label: t(".search_username"),
+       placeholder: t(".search_username_placeholder")},
+      {attr: :request_date_gteq, type: :date, label: t(".from_date")},
+      {attr: :request_date_lteq, type: :date, label: t(".to_date")},
+      {attr: :status_eq, type: :select, label: t(".status"),
+       options: BorrowRequest.statuses.map do |k, v|
+                  [k.humanize, v]
+                end, include_blank: t(".all")}
+    ]
+  end
 end

@@ -1,6 +1,6 @@
-<div class="container-fluid mt-4">
+<div class="mt-4">
   <h3 class="fw-bold mb-4 text-center"><%= t(".title") %></h3>
-
+  <%= render "search" %>
   <% if @borrow_requests.any? %>
     <div class="table-responsive">
       <table class="table table-bordered table-hover align-middle">

@@ -1,9 +1,6 @@
 <%# app/views/admin/borrow_requests/show.html.erb %>
-<div class="container-fluid mt-4">
-  <%= link_to t(".back"),
-            params[:back_to] || admin_borrow_requests_path,
-            class: "btn btn-secondary" %>
-
+<div class="mt-4">
+  <%= link_to t(".back"), admin_borrow_requests_path, class: "btn btn-secondary ms-3" %>
   <h3 class="fw-bold mb-4 text-center"><%= t(".title") %></h3>
   <div class="row g-4">
     <!-- User avatar and status -->

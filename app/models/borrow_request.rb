@@ -75,6 +75,23 @@ class BorrowRequest < ApplicationRecord
   validate :actual_borrow_date_before_end_date
   validate :actual_borrow_date_after_approved_date
 
+  def self.ransackable_attributes _auth_object = nil
+    %w(
+      id
+      user_id
+      request_date
+      status
+      start_date
+      end_date
+      actual_borrow_date
+      actual_return_date
+    )
+  end
+
+  def self.ransackable_associations _auth_object = nil
+    %w(user)
+  end
+
   def self.auto_update_overdue_requests batch_size: 100
     logger = setup_logger
     logger.info "Start auto updating overdue requests"
