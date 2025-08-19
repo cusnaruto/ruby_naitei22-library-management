@@ -91,15 +91,10 @@
             </div>
 
             <div class="card-footer bg-transparent">
-              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                <div class="btn-group" role="group">
-                  <%= link_to t(".view_details"), book_path(book), class: "btn btn-primary btn-sm" %>
-                  <% if book.available_quantity > Settings.books.minimum_available_copies %>
-                    <%= link_to t(".borrow"), "#", class: "btn btn-success btn-sm" %>
-                  <% else %>
-                    <span class="btn btn-secondary btn-sm disabled"><%= t(".unavailable") %></span>
-                  <% end %>
-                </div>
+              <div class="card-footer bg-transparent p-0">
+                <%= link_to book_path(book), class: "btn btn-primary w-100 h-100 d-flex justify-content-center align-items-center text-decoration-none" do %>
+                  <%= t(".view_details") %>
+                <% end %>
               </div>
             </div>
           </div>
