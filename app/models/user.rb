@@ -79,6 +79,18 @@ gender).freeze
             length: {maximum: 500},
             allow_blank: true
 
+  def self.ransackable_attributes _auth_object = nil
+    %w(
+      id
+      name
+      email
+      phone_number
+      role
+      status
+      created_at
+    )
+  end
+
   def favorited? item
     favorites.exists?(favorable: item)
   end

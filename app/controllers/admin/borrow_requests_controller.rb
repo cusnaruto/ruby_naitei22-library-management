@@ -17,8 +17,10 @@ class Admin::BorrowRequestsController < ApplicationController
 
   # GET /admin/borrow_requests
   def index
+    @q = BorrowRequest.includes(:user).ransack(params[:q])
+
     @pagy, @borrow_requests = pagy(
-      BorrowRequest.includes(:user).sorted
+      @q.result(distinct: true).sorted
     )
   end
 
@@ -168,6 +170,7 @@ class Admin::BorrowRequestsController < ApplicationController
   def decrement_book_stock
     @borrow_request.borrow_request_items.each do |item|
       item.book.decrement!(:available_quantity, item.quantity)
+      item.book.increment!(:borrow_count, item.quantity)
     end
   end
 

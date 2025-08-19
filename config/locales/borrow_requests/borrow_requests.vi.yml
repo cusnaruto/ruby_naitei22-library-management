@@ -24,6 +24,17 @@ vi:
         action: "Thao tác"
         status: "Trạng thái"
         no_requests: "Không có yêu cầu mượn nào"
+      search:
+        search_button: "Tìm kiếm"
+        search_id: "ID"
+        search_id_placeholder: "Nhập ID"
+        search_username: "Tên người dùng"
+        search_username_placeholder: "Nhập tên người dùng"
+        from_date: "Từ ngày"
+        to_date: "Đến ngày"
+        status: "Trạng thái"
+        all: "Tất cả"
+        search: "Tìm kiếm"
       borrow_request:
         action_view: "Xem"
 
