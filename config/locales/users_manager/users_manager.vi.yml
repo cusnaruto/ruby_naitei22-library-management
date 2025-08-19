@@ -3,7 +3,7 @@ vi:
     users:
       index:
         title: "Quản lý Người dùng"
-        id: "ID"
+        id: "Số thứ tự"
         name: "Tên"
         email: "Email"
         username: "Tên đăng nhập"
@@ -11,6 +11,14 @@ vi:
         view: "Xem"
         status: "Trạng thái"
         no_users: "Không tìm thấy người dùng"
+      search:
+        search_email: "Email"
+        search_email_placeholder: "Nhập email"
+        search_name: "Tên"
+        search_name_placeholder: "Nhập tên người dùng"
+        status_eq: "Trạng thái"
+        all: "Tất cả"
+        search: "Tìm kiếm"
       flash:
         unauthorized_access: "Bạn không có quyền truy cập vào trang này."
         not_found: "Không tìm thấy người dùng"

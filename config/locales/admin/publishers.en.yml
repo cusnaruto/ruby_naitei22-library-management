@@ -40,7 +40,7 @@ en:
         no_website: "No website provided"
 
       attributes:
-        id: "ID"
+        id: "No."
         name: "Name"
         address: "Address"
         phone_number: "Phone Number"

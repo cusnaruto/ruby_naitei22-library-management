@@ -1,5 +1,5 @@
 <tr>
-  <td><%= author.id %></td>
+  <td><%= @pagy.offset + idx + 1 %></td>
   <td class="text-start"><%= author.name %></td>
   <td><%= author.created_at.strftime("%d/%m/%Y %H:%M") %></td>
   <td>

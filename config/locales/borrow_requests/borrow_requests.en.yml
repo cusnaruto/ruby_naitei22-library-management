@@ -18,7 +18,7 @@ en:
 
       index:
         title: "Borrow Requests Management"
-        id: "ID"
+        id: "No."
         username: "Username"
         request_date: "Request Date"
         action: "Action"
@@ -26,8 +26,6 @@ en:
         no_requests: "No borrow requests found"
       search:
         search_button: "Search"
-        search_id: "ID"
-        search_id_placeholder: "Enter ID"
         search_username: "Username"
         search_username_placeholder: "Enter username"
         from_date: "Request From"

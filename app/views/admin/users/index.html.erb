@@ -1,6 +1,6 @@
 <div class="mt-4">
   <h3 class="fw-bold mb-4 text-center"><%= t(".title") %></h3>
-
+  <%= render "search" %>
   <% if @users.any? %>
     <div class="table-responsive">
       <table class="table table-bordered table-hover align-middle">
@@ -14,9 +14,9 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
+          <% @users.each_with_index do |user, idx| %>
             <tr>
-              <td><%= user.id %></td>
+              <td><%= @pagy.offset + idx + 1 %></td>
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td>

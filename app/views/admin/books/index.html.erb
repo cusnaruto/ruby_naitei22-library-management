@@ -24,8 +24,11 @@
         <th class="text-center"><%= t("admin.books.attributes.action") %></th>
       </tr>
     </thead>
+
     <tbody>
-      <%= render partial: "book", collection: @books, as: :book %>
+      <% @books.each_with_index do |book, idx| %>
+        <%= render "book", book: book, idx: idx, pagy: @pagy %>
+      <% end %>
     </tbody>
   </table>
 </div>

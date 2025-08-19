@@ -37,7 +37,7 @@ en:
         no_description: "No description available"
 
       attributes:
-        id: "ID"
+        id: "No."
         name: "Name"
         description: "Description"
         created_at: "Created At"

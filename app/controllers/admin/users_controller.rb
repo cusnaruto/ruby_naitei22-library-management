@@ -4,7 +4,8 @@ class Admin::UsersController < Admin::ApplicationController
 
   # GET /admin/users
   def index
-    @pagy, @users = pagy(User.where(role: :user).order_by_created)
+    @q = User.where(role: :user).ransack(params[:q])
+    @pagy, @users = pagy(@q.result(distinct: true).order(created_at: :desc))
   end
 
   # GET /admin/users/:id

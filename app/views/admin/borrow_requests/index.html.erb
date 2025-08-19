@@ -14,8 +14,11 @@
           </tr>
         </thead>
         <tbody>
-          <% @borrow_requests.each do |borrow_request| %>
-            <%= render "admin/borrow_requests/borrow_request", borrow_request: borrow_request %>
+          <% @borrow_requests.each_with_index do |borrow_request, idx| %>
+            <%= render "admin/borrow_requests/borrow_request",
+                      borrow_request: borrow_request,
+                      idx: idx,
+                      pagy: @pagy %>
           <% end %>
         </tbody>
       </table>

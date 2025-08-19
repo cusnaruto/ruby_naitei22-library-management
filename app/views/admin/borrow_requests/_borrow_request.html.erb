@@ -1,5 +1,5 @@
 <tr>
-  <td><%= borrow_request.id %></td>
+  <td><%= @pagy.offset + idx + 1%></td>
   <td><%= borrow_request.user_name %></td>
   <td><%= borrow_request.request_date.strftime(Settings.date_format.short) %></td>
   <td>

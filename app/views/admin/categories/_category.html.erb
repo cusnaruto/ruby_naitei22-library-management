@@ -1,5 +1,5 @@
 <tr>
-  <td><%= category.id %></td>
+  <td><%= @pagy.offset + idx + 1 %></td>
   <td class="text-center"><%= category.name %></td>
   <td>
     <%= link_to t("admin.categories.actions.view"), admin_category_path(category), class: "btn btn-sm btn-primary me-1" %>
