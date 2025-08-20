@@ -45,7 +45,7 @@ en:
         select_publisher: "Select Publisher"
 
       attributes:
-        id: "ID"
+        id: "No."
         title: "Title"
         description: "Description"
         publication_year: "Publication Year"

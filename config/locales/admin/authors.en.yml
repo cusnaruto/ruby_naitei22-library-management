@@ -18,7 +18,7 @@ en:
         search: "Search by name"
 
       attributes:
-        id: "ID"
+        id: "No."
         name: "Name"
         created_at: "Created At"
         action: "Action"

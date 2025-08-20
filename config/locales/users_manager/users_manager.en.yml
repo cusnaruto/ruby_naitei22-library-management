@@ -3,7 +3,7 @@ en:
     users:
       index:
         title: "User Management"
-        id: "ID"
+        id: "No."
         name: "Name"
         email: "Email"
         username: "Username"
@@ -11,6 +11,14 @@ en:
         view: "View"
         status: "Status"
         no_users: "No users found"
+      search:
+        search_email: "Email"
+        search_email_placeholder: "Enter email"
+        search_name: "Name"
+        search_name_placeholder: "Enter user name"
+        status_eq: "Status"
+        all: "All"
+        search: "Search"
       flash:
         unauthorized_access: "You are not authorized to access this page."
         not_found: "User not found"

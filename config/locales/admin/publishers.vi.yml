@@ -40,7 +40,7 @@ vi:
         no_website: "Chưa có website"
 
       attributes:
-        id: "ID"
+        id: "Số thứ tự"
         name: "Tên"
         address: "Địa chỉ"
         phone_number: "Số điện thoại"

@@ -45,7 +45,7 @@ vi:
         select_publisher: "Chọn nhà xuất bản"
 
       attributes:
-        id: "ID"
+        id: "Số thứ tự"
         title: "Tiêu đề"
         description: "Mô tả"
         publication_year: "Năm xuất bản"

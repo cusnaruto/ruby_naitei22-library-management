@@ -18,7 +18,7 @@ vi:
       
       index:
         title: "Quản lý Yêu cầu Mượn sách"
-        id: "ID"
+        id: "Số thứ tự"
         username: "Tên người dùng"
         request_date: "Ngày yêu cầu"
         action: "Thao tác"
@@ -26,8 +26,6 @@ vi:
         no_requests: "Không có yêu cầu mượn nào"
       search:
         search_button: "Tìm kiếm"
-        search_id: "ID"
-        search_id_placeholder: "Nhập ID"
         search_username: "Tên người dùng"
         search_username_placeholder: "Nhập tên người dùng"
         from_date: "Từ ngày"

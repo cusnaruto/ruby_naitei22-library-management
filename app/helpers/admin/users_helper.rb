@@ -23,4 +23,17 @@ module Admin::UsersHelper
     age -= 1 if now < dob + age.years
     age
   end
+
+  def user_search_inputs
+    [
+      {attr: :name_cont, type: :search, label: t(".search_name"),
+       placeholder: t(".search_name_placeholder")},
+      {attr: :email_cont, type: :search, label: t(".search_email"),
+       placeholder: t(".search_email_placeholder")},
+      {attr: :status_eq, type: :select, label: t(".status"),
+       options: User.statuses.map do |k, v|
+                  [k.humanize, v]
+                end, include_blank: t(".all")}
+    ]
+  end
 end

@@ -37,7 +37,7 @@ vi:
         no_description: "Chưa có mô tả"
 
       attributes:
-        id: "ID"
+        id: "Số thứ tự"
         name: "Tên"
         description: "Mô tả"
         created_at: "Ngày tạo"

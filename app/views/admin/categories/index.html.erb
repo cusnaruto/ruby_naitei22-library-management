@@ -25,7 +25,9 @@
       </tr>
     </thead>
     <tbody>
-      <%= render partial: "category", collection: @categories, as: :category %>
+      <% @categories.each_with_index do |category, idx| %>
+        <%= render "category", category: category, idx: idx, pagy: @pagy %>
+      <% end %>
     </tbody>
   </table>
 </div>

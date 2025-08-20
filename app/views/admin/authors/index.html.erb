@@ -26,8 +26,10 @@
       </tr>
     </thead>
     <tbody>
-      <%= render partial: "author", collection: @authors,
-                 as: :author %>
+      <% @authors
+        .each_with_index do |author, idx| %>
+        <%= render "author", author: author, idx: idx, pagy: @pagy %>
+      <% end %>
     </tbody>
   </table>
 </div>
